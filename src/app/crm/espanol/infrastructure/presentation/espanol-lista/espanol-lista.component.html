@@ -1,0 +1,53 @@
+<h2>Bienvenido al diccionario de español</h2>
+<div class="buttons buttons-center">
+    <button mat-raised-button color="accent" (click)="buscador(options)">
+        <mat-icon>search</mat-icon>
+        Buscador
+    </button>
+    <button mat-raised-button (click)="aniadirOn()">
+        <mat-icon>library_add</mat-icon> Añadir palabra
+    </button>
+</div>
+
+<table mat-table [dataSource]="lista_espanol" class="mat-elevation-z8" *ngIf="lista_espanol.length > 0 else nopalabras">
+
+    <ng-container matColumnDef="Id">
+        <th mat-header-cell *matHeaderCellDef> Id </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Nombre">
+        <th mat-header-cell *matHeaderCellDef> Nombre </th>
+        <td mat-cell *matCellDef="let element"> {{element.palabra}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Descripcion">
+        <th mat-header-cell *matHeaderCellDef> Descripcion </th>
+        <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="FechaCreacion">
+        <th mat-header-cell *matHeaderCellDef> Fecha Creacion </th>
+        <td mat-cell *matCellDef="let element"> {{element.fechaAlta}} </td>
+    </ng-container>
+    abbr
+    <ng-container matColumnDef="Action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let element">
+            <button mat-fab color="primary" (click)="editarOn(element)">
+                <mat-icon> border_color</mat-icon>
+            </button>
+            <button mat-fab color="warn" (click)="borrarOn(element)">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<ng-template #nopalabras>
+    <br>
+    <h2 class="centrar">No hay palabras que mostrar</h2>
+</ng-template>

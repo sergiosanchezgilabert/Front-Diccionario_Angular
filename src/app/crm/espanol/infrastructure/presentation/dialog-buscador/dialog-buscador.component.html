@@ -1,0 +1,12 @@
+<form class="buscador-container">
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Palabra</mat-label>
+        <input type="text" placeholder="Escoge una" aria-label="Palabra" matInput [formControl]="myControl"
+            [matAutocomplete]="auto">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                {{option}}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+</form>

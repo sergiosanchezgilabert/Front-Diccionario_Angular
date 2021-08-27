@@ -1,0 +1,15 @@
+<mat-card class="example-card">
+  <mat-card-header>
+      <div class="example-header-image"></div>
+      <mat-card-title class="text text-center">{{palabra.palabra}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="text text-center">
+      <p>Descripcion: {{palabra.descripcion}}</p>
+      <p>Descripcion: {{palabra.fechaAlta}}</p>
+
+  </mat-card-content>
+  <mat-card-actions class="buttons buttons-center">
+      <button mat-raised-button color="primary" (click)="editarOn(palabra)">EDITAR</button>
+      <button mat-raised-button color="primary" (click)="borrarOn(palabra.palabra)">BORRAR</button>
+  </mat-card-actions>
+</mat-card>
