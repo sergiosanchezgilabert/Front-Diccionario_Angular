@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-toolbar',
@@ -11,9 +12,21 @@ export class ToolbarComponent implements OnInit {
 
   showIngles =false;
 
-  constructor() { }
+  constructor(private router:Router) { }
 
   ngOnInit(): void {
+  }
+
+  inglesOn(){
+    this.router.navigate(['ingles']);
+  }
+
+  espanolOn(){
+    this.router.navigate(['espanol']);
+  }
+
+  inicio(){
+    this.router.navigate(['']);
   }
 
 }

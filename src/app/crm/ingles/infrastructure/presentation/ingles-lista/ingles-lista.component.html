@@ -1,1 +1,65 @@
-<p>ingles-lista works!</p>
+<h2>Welcome to the english dictionary</h2>
+<div class="buttons buttons-center">
+    <button mat-raised-button color="accent" (click)="buscador(options)">
+        <mat-icon>search</mat-icon>
+        Search
+    </button>
+    <button mat-raised-button color="success" (click)="aniadirOn()">
+        <mat-icon>library_add</mat-icon> Add word
+    </button>
+</div>
+
+<table mat-table [dataSource]="lista_ingles_web" class="mat-elevation-z8"
+    *ngIf="lista_ingles_web.length > 0 else nopalabras">
+
+    <ng-container matColumnDef="Id">
+        <th mat-header-cell *matHeaderCellDef> Id </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.palabra}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Traduction">
+        <th mat-header-cell *matHeaderCellDef> Traduction </th>
+        <td mat-cell *matCellDef="let element">
+            {{element.palabraEspanol}}
+            <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon"
+                (click)="espanolOn(element)">
+                <img src="https://image.flaticon.com/icons/png/512/197/197593.png" width="15px" />
+            </button>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="CreateDate">
+        <th mat-header-cell *matHeaderCellDef> CreateDate </th>
+        <td mat-cell *matCellDef="let element"> {{element.fechaAlta}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="ModifyDate">
+        <th mat-header-cell *matHeaderCellDef> ModifyDate </th>
+        <td mat-cell *matCellDef="let element"> {{element.fechaModificacion}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let element">
+            <button mat-fab color="primary" (click)="editarOn(element)">
+                <mat-icon> border_color</mat-icon>
+            </button>
+            <button mat-fab color="warn" (click)="borrarOn(element)">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<ng-template #nopalabras>
+    <br>
+    <h2 class="centrar">There aren´t any words to show</h2>
+</ng-template>

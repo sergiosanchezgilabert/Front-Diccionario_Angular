@@ -1,8 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment.prod';
 import { Espanol } from '../../domain/IEspanol';
+import { EspanolWeb } from '../../domain/IEspanolWeb';
 
 @Injectable({
   providedIn: 'root'
@@ -12,14 +14,18 @@ export class EspanolService {
   baseUrl = environment.baseUrl
   objeto = environment.espanol
 
+  errorHandler(error: HttpErrorResponse) {
+    return Observable.throw(error.message || "server error.");
+  }
+
   constructor(private http: HttpClient) {
     console.log('personas services listo')
   }
 
-  cargarTodos(): Observable<Array<Espanol>> {
+  cargarTodos(): Observable<Array<EspanolWeb>> {
     const url = this.baseUrl + this.objeto;
 
-    return this.http.get<Array<Espanol>>(url)
+    return this.http.get<Array<EspanolWeb>>(url)
   }
 
   aniadir(palabra: Espanol): Observable<Object> {
@@ -41,37 +47,12 @@ export class EspanolService {
 
     const url = this.baseUrl + this.objeto + palabra;
 
-    console.log(url)
-
     return this.http.delete(url);
   }
-  /*
-    getPersona(id: string | null): Observable<ResponsePersona> {
-  
-      const url = this.baseUrl + this.objeto + id;
-  
-      return this.http.get<ResponsePersona>(url);
-    }
-  
-    eliminarPersona(id: number): Observable<Object> {
-  
-      const url = this.baseUrl + this.objeto + id;
-  
-      return this.http.delete(url);
-    }
-  
-    aniadirPersona(persona: []): Observable<Object> {
-  
-      const url = this.baseUrl + this.objeto;
-  
-      return this.http.post(url, persona);
-  
-    }
-  
-    editarPersona(persona: [], id: number): Observable<Object> {
-  
-      const url = this.baseUrl + this.objeto + id;
-  
-      return this.http.put(url, persona);
-    }*/
+
+  getPalabra(palabra:string | null):Observable<Espanol>{
+    const url = this.baseUrl + this.objeto + palabra
+
+    return this.http.get<Espanol>(url).pipe(catchError(this.errorHandler))
+  }
 }

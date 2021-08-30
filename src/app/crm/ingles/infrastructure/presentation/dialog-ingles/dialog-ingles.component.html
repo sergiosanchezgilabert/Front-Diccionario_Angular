@@ -1,0 +1,18 @@
+<mat-sidenav-container>
+    <mat-sidenav-content>
+        <form [formGroup]="formEspanol">
+
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="palabra" formControlName="palabra">
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="palabraEspanol" formControlName="palabraEspanol">
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" (click)="enviar()">Enviar</button>
+            <button mat-raised-button color="primary" (click)="cancelar()">Cancelar</button>
+
+        </form>
+    </mat-sidenav-content>
+</mat-sidenav-container>

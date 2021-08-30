@@ -1,10 +1,13 @@
+import { DatePipe } from '@angular/common';
 import { ChangeDetectorRef, Component, OnChanges, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Router, RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import { Espanol } from '../../../domain/IEspanol';
+import { EspanolWeb } from '../../../domain/IEspanolWeb';
 import { EspanolService } from '../../service/espanol-service';
 import { DialogBuscadorComponent } from '../dialog-buscador/dialog-buscador.component';
 import { DialogEspanolComponent } from '../dialog-espanol/dialog-espanol.component';
@@ -14,21 +17,17 @@ import { DialogEspanolComponent } from '../dialog-espanol/dialog-espanol.compone
   templateUrl: './espanol-lista.component.html',
   styleUrls: ['./espanol-lista.component.scss']
 })
-export class EspanolListaComponent implements OnInit, OnChanges {
+export class EspanolListaComponent implements OnInit {
 
-  lista_espanol: Array<Espanol> = []
+  lista_espanol: Array<EspanolWeb> = []
 
-  options: string[] = []//= ['One', 'Two', 'Three'];
+  options: string[] = []
 
-  displayedColumns: string[] = ['Id', 'Nombre', 'Descripcion', 'FechaCreacion', 'Action'];
+  displayedColumns: string[] = ['Id', 'Nombre', 'Descripcion', 'FechaCreacion', 'Palabras Ingles','Action'];
 
-  constructor(private service: EspanolService, public dialog: MatDialog) {
+  constructor(private service: EspanolService, public dialog: MatDialog, 
+    public datepipe:DatePipe,public router:Router) {
 
-  }
-  ngOnChanges(change: SimpleChanges) {
-    if (change.lista_espanol) {
-      console.log(this.lista_espanol);
-    }
   }
 
   ngOnInit() {
@@ -43,10 +42,10 @@ export class EspanolListaComponent implements OnInit, OnChanges {
         this.lista_espanol = resp;
 
         for (let i = 0; i < this.lista_espanol.length; i++) {
-          console.log('Vuelta ' + i)
-          console.log(this.lista_espanol[i].palabra)
           this.options.push(this.lista_espanol[i].palabra)
-          console.log(this.options)
+
+          this.lista_espanol[i].fechaAlta = this.datepipe.transform(this.lista_espanol[i].fechaAlta, 'dd/MM/yyyy')
+          this.lista_espanol[i].fechaModificacion = this.datepipe.transform(this.lista_espanol[i].fechaModificacion, 'dd/MM/yyyy')
         }
       }
     )
@@ -107,11 +106,11 @@ export class EspanolListaComponent implements OnInit, OnChanges {
     })
   }
 
+  detallesOn(element:EspanolWeb){
+    let palabra:String
+    palabra=element.palabra
 
-
-  procesarBorrado(id: number) {
-
-
+    this.router.navigate(['espanol', palabra]);
   }
 
   buscador(options: string[]) {

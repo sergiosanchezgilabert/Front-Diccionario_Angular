@@ -1,7 +1,7 @@
 <form class="buscador-container">
     <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Palabra</mat-label>
-        <input type="text" placeholder="Escoge una" aria-label="Palabra" matInput [formControl]="myControl"
+        <input #palabra type="text" placeholder="Escoge una" class="palabra" name="palabra" id="palabra" aria-label="palabra" matInput [formControl]="myControl"
             [matAutocomplete]="auto">
         <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
             <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
@@ -9,4 +9,5 @@
             </mat-option>
         </mat-autocomplete>
     </mat-form-field>
+    <button mat-raised-button color="primary" (click)="buscarOn(palabra.value)">Buscar</button>
 </form>

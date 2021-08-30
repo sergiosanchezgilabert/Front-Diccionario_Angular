@@ -1,29 +1,28 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
-import { Espanol } from '../../../domain/IEspanol';
-import { EspanolService } from '../../service/espanol-service';
+import { Ingles } from '../../../domain/I-Ingles';
+import { InglesService } from '../../service/InglesService';
 
 @Component({
-  selector: 'app-dialog-espanol',
-  templateUrl: './dialog-espanol.component.html',
-  styleUrls: ['./dialog-espanol.component.scss']
+  selector: 'app-dialog-ingles',
+  templateUrl: './dialog-ingles.component.html',
+  styleUrls: ['./dialog-ingles.component.scss']
 })
-export class DialogEspanolComponent implements OnInit {
+export class DialogInglesComponent implements OnInit {
 
-  palabra: Espanol
+  palabra: Ingles
 
   editando: boolean = false
 
   formEspanol: FormGroup = this.fb.group({
     palabra: [''],
-    descripcion: [''],
-    fechaAlta: ['']
+    palabraEspanol: ['']
   })
 
-  constructor(public dialogRef: MatDialogRef<DialogEspanolComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any, public fb: FormBuilder, private espanolService: EspanolService) { }
+  constructor(public dialogRef: MatDialogRef<DialogInglesComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any, public fb: FormBuilder, private espanolService: InglesService) { }
 
   ngOnInit(): void {
     if (this.data !== null) {
@@ -64,4 +63,5 @@ export class DialogEspanolComponent implements OnInit {
         })
     }
   }
+
 }

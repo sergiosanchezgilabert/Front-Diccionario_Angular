@@ -1,12 +1,12 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
-        <span>Diccionario</span>
+        <span (click)="inicio()">Diccionario</span>
         <span class="icon-spacer"></span>
-        <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-            <mat-icon>favorite</mat-icon>
+        <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" (click)="espanolOn()">
+            <img src="https://image.flaticon.com/icons/png/512/197/197593.png" width="30px" />
         </button>
-        <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-            <mat-icon>share</mat-icon>
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" (click)="inglesOn()">
+            <img src="https://image.flaticon.com/icons/png/512/323/323329.png" width="30px" />
         </button>
     </mat-toolbar-row>
 </mat-toolbar>

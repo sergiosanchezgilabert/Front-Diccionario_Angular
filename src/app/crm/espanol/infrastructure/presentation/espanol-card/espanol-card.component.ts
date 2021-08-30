@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
+import { InglesWeb } from 'src/app/crm/ingles/domain/I-InglesWeb';
 import Swal from 'sweetalert2';
 import { Espanol } from '../../../domain/IEspanol';
 import { EspanolService } from '../../service/espanol-service';
@@ -12,13 +14,20 @@ import { DialogEspanolComponent } from '../dialog-espanol/dialog-espanol.compone
 })
 export class EspanolCardComponent implements OnInit {
 
-  @Input() palabra: Espanol
+  palabra: Espanol
 
   @Output() propagar = new EventEmitter<number>();
 
-  constructor(public dialog: MatDialog, private service: EspanolService) { }
+  constructor(public dialog: MatDialog, private service: EspanolService,
+    private route: ActivatedRoute, private router:Router) { }
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe((param) => {
+      this.service.getPalabra(param.get("palabra"))
+        .subscribe((resp) => {
+          this.palabra = resp;
+        });
+    });
   }
 
   editarOn(palabra: any) {
@@ -61,5 +70,12 @@ export class EspanolCardComponent implements OnInit {
     })
   }
 
+  volverOn(){
+    this.router.navigate(['espanol']);
+  }
+
+  inglesOn(element:InglesWeb){
+    this.router.navigate(['ingles',element.palabra]);
+  }
 
 }

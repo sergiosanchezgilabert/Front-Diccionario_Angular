@@ -15,18 +15,21 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { DialogBuscadorComponent } from './crm/espanol/infrastructure/presentation/dialog-buscador/dialog-buscador.component';
 import { DialogEspanolComponent } from './crm/espanol/infrastructure/presentation/dialog-espanol/dialog-espanol.component';
+import { DialogInglesComponent } from './crm/ingles/infrastructure/presentation/dialog-ingles/dialog-ingles.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
     AppComponent,
     EspanolCardComponent,
     InglesCardComponent,
-    InglesListaComponent,
     ToolbarComponent,
     HomeComponent,
     EspanolListaComponent,
+    InglesListaComponent,
     DialogBuscadorComponent,
-    DialogEspanolComponent
+    DialogEspanolComponent,
+    DialogInglesComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,7 @@ import { DialogEspanolComponent } from './crm/espanol/infrastructure/presentatio
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
