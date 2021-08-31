@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
 import { Ingles } from '../../../domain/I-Ingles';
@@ -16,9 +16,9 @@ export class DialogInglesComponent implements OnInit {
 
   editando: boolean = false
 
-  formEspanol: FormGroup = this.fb.group({
-    palabra: [''],
-    palabraEspanol: ['']
+  formIngles: FormGroup = this.fb.group({
+    palabra: ['',Validators.required],
+    palabraEspanol: ['',Validators.required]
   })
 
   constructor(public dialogRef: MatDialogRef<DialogInglesComponent>,
@@ -27,7 +27,7 @@ export class DialogInglesComponent implements OnInit {
   ngOnInit(): void {
     if (this.data !== null) {
       this.palabra = this.data.palabras
-      this.formEspanol.patchValue(this.data.palabras)
+      this.formIngles.patchValue(this.data.palabras)
       this.editando = true
     }
   }
@@ -38,7 +38,7 @@ export class DialogInglesComponent implements OnInit {
 
   enviar() {
     if (this.editando == true) {
-      this.espanolService.editar(this.formEspanol.value)
+      this.espanolService.editar(this.formIngles.value)
         .subscribe(() => {
           Swal.fire({
             position: 'top',
@@ -47,10 +47,10 @@ export class DialogInglesComponent implements OnInit {
             showConfirmButton: false,
             timer: 1500
           })
-          this.dialogRef.close(this.formEspanol.value);
+          this.dialogRef.close(this.formIngles.value);
         })
     }else{
-      this.espanolService.aniadir(this.formEspanol.value)
+      this.espanolService.aniadir(this.formIngles.value)
         .subscribe(() => {
           Swal.fire({
             position: 'top',
@@ -59,7 +59,7 @@ export class DialogInglesComponent implements OnInit {
             showConfirmButton: false,
             timer: 1500
           })
-          this.dialogRef.close(this.formEspanol.value);
+          this.dialogRef.close(this.formIngles.value);
         })
     }
   }

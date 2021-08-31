@@ -1,9 +1,11 @@
+import { DatePipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InglesWeb } from 'src/app/crm/ingles/domain/I-InglesWeb';
 import Swal from 'sweetalert2';
 import { Espanol } from '../../../domain/IEspanol';
+import { EspanolWeb } from '../../../domain/IEspanolWeb';
 import { EspanolService } from '../../service/espanol-service';
 import { DialogEspanolComponent } from '../dialog-espanol/dialog-espanol.component';
 
@@ -14,18 +16,21 @@ import { DialogEspanolComponent } from '../dialog-espanol/dialog-espanol.compone
 })
 export class EspanolCardComponent implements OnInit {
 
-  palabra: Espanol
+  palabra: EspanolWeb
 
   @Output() propagar = new EventEmitter<number>();
 
   constructor(public dialog: MatDialog, private service: EspanolService,
-    private route: ActivatedRoute, private router:Router) { }
+    private route: ActivatedRoute, private router:Router, public datepipe:DatePipe) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((param) => {
       this.service.getPalabra(param.get("palabra"))
         .subscribe((resp) => {
-          this.palabra = resp;
+          this.palabra = resp
+          
+          this.palabra.fechaAlta=this.datepipe.transform(this.palabra.fechaAlta, 'dd/MM/yyyy')
+          this.palabra.fechaModificacion = this.datepipe.transform(this.palabra.fechaModificacion, 'dd/MM/yyyy')
         });
     });
   }

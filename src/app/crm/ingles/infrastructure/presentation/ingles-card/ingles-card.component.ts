@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -18,13 +19,16 @@ export class InglesCardComponent implements OnInit {
   @Output() propagar = new EventEmitter<number>();
 
   constructor(public dialog: MatDialog, private service: InglesService,
-    private route: ActivatedRoute, private router: Router) { }
+    private route: ActivatedRoute, private router: Router, public datepipe: DatePipe) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((param) => {
       this.service.getPalabra(param.get("palabra"))
         .subscribe((resp) => {
-          this.palabra = resp;
+          this.palabra = resp
+          
+          this.palabra.fechaAlta=this.datepipe.transform(this.palabra.fechaAlta, 'dd/MM/yyyy')
+          this.palabra.fechaModificacion = this.datepipe.transform(this.palabra.fechaModificacion, 'dd/MM/yyyy')
         });
     });
   }
@@ -73,8 +77,8 @@ export class InglesCardComponent implements OnInit {
     this.router.navigate(['ingles']);
   }
 
-  espanolOn(palabra:String) {
-    this.router.navigate(['espanol',palabra]);
+  espanolOn(palabra: String) {
+    this.router.navigate(['espanol', palabra]);
   }
 
 

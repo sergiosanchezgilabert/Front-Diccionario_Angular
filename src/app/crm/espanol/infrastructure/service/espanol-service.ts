@@ -50,9 +50,9 @@ export class EspanolService {
     return this.http.delete(url);
   }
 
-  getPalabra(palabra:string | null):Observable<Espanol>{
+  getPalabra(palabra:string | null):Observable<EspanolWeb>{
     const url = this.baseUrl + this.objeto + palabra
 
-    return this.http.get<Espanol>(url).pipe(catchError(this.errorHandler))
+    return this.http.get<EspanolWeb>(url).pipe(catchError(this.errorHandler))
   }
 }

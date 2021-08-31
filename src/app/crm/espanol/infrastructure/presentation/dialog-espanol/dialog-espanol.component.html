@@ -2,17 +2,18 @@
     <mat-sidenav-content>
         <form [formGroup]="formEspanol">
 
-            <mat-form-field class="example-full-width">
-                <input matInput placeholder="palabra" formControlName="palabra">
+            <mat-form-field class="example-full-width" >
+                <input *ngIf="editando==true" matInput placeholder="palabra" formControlName="palabra" readonly>
+                <input *ngIf="editando==false" matInput placeholder="palabra" formControlName="palabra">
             </mat-form-field>
 
             <mat-form-field class="example-full-width">
                 <input matInput placeholder="descripcion" formControlName="descripcion">
             </mat-form-field>
 
-            <mat-form-field class="example-full-width">
-                <input matInput placeholder="fechaAlta" formControlName="fechaAlta">
-            </mat-form-field>
+            <div *ngIf="!formEspanol.valid">
+                Palabra y Descripcion son requeridos.
+            </div>
 
             <button mat-raised-button color="primary" (click)="enviar()">Enviar</button>
             <button mat-raised-button color="primary" (click)="cancelar()">Cancelar</button>

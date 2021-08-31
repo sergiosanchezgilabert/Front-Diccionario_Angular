@@ -1,21 +1,56 @@
+.container-card{
+  display: flex;
+  justify-content: center;
+}
+
 .example-card {
-    max-width: 400px;
-    max-height: 350px;
-    border-radius: 20px;
-    margin: 5px;
-    margin-top: 40px;
-    background-color: lightgray;
-  }
-  
-  .buttons-center{
-    text-align: center;
-  }
-  
-  .text-center{
-    text-align: center;
-  }
-  
-  .image-size{
-    height: 200px;
-    width: 300px;
-  }
+  min-width: 500px;
+  max-height: 450px;
+  border-radius: 20px;
+  margin: 5px;
+  margin-top: 40px;
+  background-color: #ECAD50;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+.cursor:hover{
+  background-color: #DEADFF;
+}
+
+.card-title{
+  font-size: 30px;
+  padding-bottom: 15px;
+  text-decoration: underline black;
+}
+
+.buttons-spacingtop{
+  margin-top: 40px
+}
+
+.text-subr{
+  text-decoration: underline black; 
+}
+
+.table-center{
+  margin: auto;
+}
+
+.buttons-center {
+  text-align: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.image-size {
+  height: 200px;
+  width: 300px;
+}
+
+.mat-card-header {
+  justify-content: center;
+}

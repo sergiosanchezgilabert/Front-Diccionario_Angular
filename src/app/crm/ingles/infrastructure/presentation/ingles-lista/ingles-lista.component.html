@@ -1,55 +1,63 @@
-<h2>Welcome to the english dictionary</h2>
-<div class="buttons buttons-center">
-    <button mat-raised-button color="accent" (click)="buscador(options)">
-        <mat-icon>search</mat-icon>
-        Search
-    </button>
-    <button mat-raised-button color="success" (click)="aniadirOn()">
-        <mat-icon>library_add</mat-icon> Add word
-    </button>
-</div>
+<h2 class="text text-center text-margintop">Welcome to the english dictionary</h2>
+
+<form class="buscador-container">
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Buscar Palabra</mat-label>
+        <input #palabra type="text" placeholder="Escoge una" class="palabra" name="palabra" id="palabra" aria-label="palabra" matInput [formControl]="myControl"
+            [matAutocomplete]="auto">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                {{option}}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+    <br />
+    <div class="buttons buttons-center buttons-search">
+        <button mat-raised-button color="primary" (click)="buscarOn(palabra.value)">Buscar</button>
+    </div>
+</form>
 
 <table mat-table [dataSource]="lista_ingles_web" class="mat-elevation-z8"
     *ngIf="lista_ingles_web.length > 0 else nopalabras">
 
     <ng-container matColumnDef="Id">
-        <th mat-header-cell *matHeaderCellDef> Id </th>
-        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        <th mat-header-cell *matHeaderCellDef class="text text-bold text-center"> Id </th>
+        <td mat-cell *matCellDef="let element" class="text text-center"> {{element.id}} </td>
     </ng-container>
 
     <ng-container matColumnDef="Name">
-        <th mat-header-cell *matHeaderCellDef> Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.palabra}} </td>
+        <th mat-header-cell *matHeaderCellDef class="text text-bold text-center"> Name </th>
+        <td mat-cell *matCellDef="let element" class="text text-center"> {{element.palabra}} </td>
     </ng-container>
 
     <ng-container matColumnDef="Traduction">
-        <th mat-header-cell *matHeaderCellDef> Traduction </th>
-        <td mat-cell *matCellDef="let element">
+        <th mat-header-cell *matHeaderCellDef class="text text-bold text-center"> Traduction </th>
+        <td mat-cell *matCellDef="let element" class="text text-center cursor" (click)="espanolOn(element)">
             {{element.palabraEspanol}}
             <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon"
-                (click)="espanolOn(element)">
+                >
                 <img src="https://image.flaticon.com/icons/png/512/197/197593.png" width="15px" />
             </button>
         </td>
     </ng-container>
 
     <ng-container matColumnDef="CreateDate">
-        <th mat-header-cell *matHeaderCellDef> CreateDate </th>
-        <td mat-cell *matCellDef="let element"> {{element.fechaAlta}} </td>
+        <th mat-header-cell *matHeaderCellDef class="text text-bold text-center"> CreateDate </th>
+        <td mat-cell *matCellDef="let element" class="text text-center"> {{element.fechaAlta}} </td>
     </ng-container>
 
     <ng-container matColumnDef="ModifyDate">
-        <th mat-header-cell *matHeaderCellDef> ModifyDate </th>
-        <td mat-cell *matCellDef="let element"> {{element.fechaModificacion}} </td>
+        <th mat-header-cell *matHeaderCellDef class="text text-bold text-center"> ModifyDate </th>
+        <td mat-cell *matCellDef="let element" class="text text-center"> {{element.fechaModificacion}} </td>
     </ng-container>
 
     <ng-container matColumnDef="Action">
-        <th mat-header-cell *matHeaderCellDef> Action </th>
-        <td mat-cell *matCellDef="let element">
-            <button mat-fab color="primary" (click)="editarOn(element)">
+        <th mat-header-cell *matHeaderCellDef class="text text-bold text-center"> Action </th>
+        <td mat-cell *matCellDef="let element" class="text text-center buttons buttons-center">
+            <button mat-fab color="primary" (click)="editarOn(element)" class="button-scaled">
                 <mat-icon> border_color</mat-icon>
             </button>
-            <button mat-fab color="warn" (click)="borrarOn(element)">
+            <button mat-fab color="warn" (click)="borrarOn(element)" class="button-marginleft button-scaled">
                 <mat-icon>delete</mat-icon>
             </button>
         </td>
@@ -58,6 +66,12 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+
+<div class="buttons buttons-center buttons-add">
+    <button mat-raised-button color="success" (click)="aniadirOn()">
+        <mat-icon>library_add</mat-icon> Add word
+    </button>
+</div>
 
 <ng-template #nopalabras>
     <br>

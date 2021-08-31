@@ -28,8 +28,8 @@ export class InglesListaComponent implements OnInit {
 
   displayedColumns: string[] = ['Id', 'Name', 'Traduction', 'CreateDate', 'ModifyDate', 'Action'];
 
-  constructor( private service: InglesService, public dialog: MatDialog,
-     public datepipe: DatePipe,public router:Router
+  constructor(private service: InglesService, public dialog: MatDialog,
+    public datepipe: DatePipe, public router: Router
   ) {
 
   }
@@ -49,10 +49,20 @@ export class InglesListaComponent implements OnInit {
           this.lista_ingles_web[i].fechaAlta = this.datepipe.transform(this.lista_ingles_web[i].fechaAlta, 'dd/MM/yyyy')
           this.lista_ingles_web[i].fechaModificacion = this.datepipe.transform(this.lista_ingles_web[i].fechaModificacion, 'dd/MM/yyyy')
         }
+        this.cargarDatosBuscador()
+
       }
     )
 
   }
+
+  cargarDatosBuscador() {
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    );
+  }
+
 
   aniadirOn() {
     const dialogRef = this.dialog.open(DialogInglesComponent, {
@@ -111,9 +121,9 @@ export class InglesListaComponent implements OnInit {
     })
   }
 
-  espanolOn(element:InglesWeb){
-    let palabra:String
-    palabra=element.palabraEspanol
+  espanolOn(element: InglesWeb) {
+    let palabra: String
+    palabra = element.palabraEspanol
 
     this.router.navigate(['espanol', palabra]);
   }
@@ -123,7 +133,7 @@ export class InglesListaComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogBuscadorComponent, {
       width: '250px',
       height: '200px',
-      data: { options: options,idioma:'ingles' }
+      data: { options: options, idioma: 'ingles' }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -132,4 +142,33 @@ export class InglesListaComponent implements OnInit {
       }
     });
   }
+
+
+
+
+  myControl = new FormControl();
+  idioma: string
+  filteredOptions: Observable<string[]>;
+
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  }
+
+  buscarOn(palabra: string) {
+    this.router.navigate(['ingles', palabra])
+  }
+
+
+
+
+
+
+
+
+
+
+
 }

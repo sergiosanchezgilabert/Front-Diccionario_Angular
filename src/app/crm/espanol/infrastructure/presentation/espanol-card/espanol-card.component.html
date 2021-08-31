@@ -1,24 +1,38 @@
-<mat-card class="example-card" *ngIf="palabra !== undefined  else nopalabra">
-    <mat-card-header>
-        <div class="example-header-image"></div>
-        <mat-card-title class="text text-center">{{palabra?.palabra}}</mat-card-title>
-    </mat-card-header>
-    <mat-card-content class="text text-center">
-        <p>Descripcion: {{palabra?.descripcion}}</p>
-        <p>Fecha Alta: {{palabra?.fechaAlta}}</p>
-        <p>Fecha Modificacion: {{palabra?.fechaModificacion}}</p>
-        <p *ngFor="let element of palabra.palabrasIngles">
-         {{element.palabra}}
-         <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" (click)="inglesOn(element)">
-            <img src="https://image.flaticon.com/icons/png/512/323/323329.png" width="30px" />
-        </button>
-        </p>
+<div class="container-card">
+    <mat-card class="example-card" *ngIf="palabra !== undefined  else nopalabra">
+        <mat-card-header>
+            <mat-card-title class="text text-center card-title">{{palabra?.palabra}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="text text-center card-body">
+            <p>Descripcion: {{palabra?.descripcion}}</p>
+            <p>Fecha Alta: {{palabra?.fechaAlta}}</p>
+            <p>Fecha Modificacion: {{palabra?.fechaModificacion}}</p>
 
-    </mat-card-content>
-    <mat-card-actions class="buttons buttons-center">
-        <button mat-raised-button color="primary" (click)="volverOn()">LISTA</button>
-    </mat-card-actions>
-</mat-card>
+            <table class="table table-center">
+                <tr>
+                    <th class="text-subr">Palabra ingles</th>
+                </tr>
+                <tr *ngFor="let element of palabra.palabrasIngles" class="cursor">
+                    <td>
+                        {{element.palabra}}
+                        <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon"
+                            (click)="inglesOn(element)">
+                            <img src="https://image.flaticon.com/icons/png/512/323/323329.png" width="30px" />
+                        </button>
+                    </td>
+                </tr>
+            </table>
+
+        </mat-card-content>
+    </mat-card>
+</div>
+
+<mat-card-actions class="buttons buttons-center buttons-spacingtop">
+    <button mat-raised-button color="primary" (click)="volverOn()">
+        <mat-icon>arrow_back</mat-icon>
+        BACK
+    </button>
+</mat-card-actions>
 
 <ng-template #nopalabra>
     <br>

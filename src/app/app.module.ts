@@ -1,22 +1,20 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { ErrorHandler, NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/material/material.module';
 import { EspanolCardComponent } from './crm/espanol/infrastructure/presentation/espanol-card/espanol-card.component';
 import { InglesCardComponent } from './crm/ingles/infrastructure/presentation/ingles-card/ingles-card.component';
-import { InglesListaComponent } from './crm/ingles/infrastructure/presentation/ingles-lista/ingles-lista.component';
 import { ToolbarComponent } from './shared/toolbar/toolbar.component';
 import { HomeComponent } from './shared/home/home.component';
-import { EspanolListaComponent } from './crm/espanol/infrastructure/presentation/espanol-lista/espanol-lista.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { DialogBuscadorComponent } from './crm/espanol/infrastructure/presentation/dialog-buscador/dialog-buscador.component';
-import { DialogEspanolComponent } from './crm/espanol/infrastructure/presentation/dialog-espanol/dialog-espanol.component';
-import { DialogInglesComponent } from './crm/ingles/infrastructure/presentation/dialog-ingles/dialog-ingles.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ErrorComponent } from './shared/error/error.component';
+import { GlobalErrorHandlerService } from './shared/error/service/global-error-handler-service';
+import { InterceptorService } from './crm/interceptor.service';
 
 @NgModule({
   declarations: [
@@ -25,21 +23,18 @@ import { DatePipe } from '@angular/common';
     InglesCardComponent,
     ToolbarComponent,
     HomeComponent,
-    EspanolListaComponent,
-    InglesListaComponent,
-    DialogBuscadorComponent,
-    DialogEspanolComponent,
-    DialogInglesComponent
+    ErrorComponent,
+    
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
     MaterialModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserModule,
+    BrowserAnimationsModule
   ],
-  providers: [DatePipe],
+  providers: [DatePipe,{ provide: ErrorHandler, useClass: GlobalErrorHandlerService },{provide:HTTP_INTERCEPTORS,useClass:InterceptorService,multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

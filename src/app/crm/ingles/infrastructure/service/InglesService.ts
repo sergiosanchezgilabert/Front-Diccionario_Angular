@@ -1,6 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment.prod';
 import { Ingles } from '../../domain/I-Ingles';
 import { InglesWeb } from '../../domain/I-InglesWeb';
@@ -23,12 +24,11 @@ export class InglesService {
     return this.http.get<Array<InglesWeb>>(url)
   }
 
-  aniadir(palabra: Ingles): Observable<Object> {
+  aniadir(palabra: Ingles): Observable<any> {
 
     const url = this.baseUrl + this.objeto
 
     return this.http.post(url, palabra)
-
   }
 
   editar(ingles: Ingles): Observable<Object> {

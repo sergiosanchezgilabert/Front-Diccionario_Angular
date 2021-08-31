@@ -1,5 +1,5 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
 import { Espanol } from '../../../domain/IEspanol';
@@ -17,9 +17,8 @@ export class DialogEspanolComponent implements OnInit {
   editando: boolean = false
 
   formEspanol: FormGroup = this.fb.group({
-    palabra: [''],
-    descripcion: [''],
-    fechaAlta: ['']
+    palabra: ['',Validators.required],
+    descripcion: ['',Validators.required]
   })
 
   constructor(public dialogRef: MatDialogRef<DialogEspanolComponent>,
