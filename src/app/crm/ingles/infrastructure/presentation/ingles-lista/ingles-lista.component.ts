@@ -134,6 +134,7 @@ export class InglesListaComponent implements OnInit {
 
   buscarOn(palabra: string) {
     if (palabra !== '')
+      this.service.getPalabra(palabra)
       this.router.navigate(['ingles', palabra])
   }
 }

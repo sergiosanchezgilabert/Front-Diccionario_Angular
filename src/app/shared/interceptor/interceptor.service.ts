@@ -34,6 +34,21 @@ export class InterceptorService implements HttpInterceptor {
             })
         }
 
+        if (error.status === 404) {
+            Swal.fire({
+                title: '<strong>Not find!</strong>',
+                icon: 'info',
+                showCloseButton: true,
+                showCancelButton: true,
+                focusConfirm: false,
+                confirmButtonText:
+                    '<i class="fa fa-thumbs-up"></i> Fantastic!',
+                confirmButtonAriaLabel: 'Thumbs up, great!',
+                cancelButtonText:
+                    '<i class="fa fa-thumbs-down"> Cancel</i>'
+            })
+        }
+
         console.log('Ocurrio un error')
         console.warn(error)
         return throwError('Error personalizado')
