@@ -1,0 +1,163 @@
+@charset "UTF-8";
+/* ==== Iconos Toolbar ==== */
+.icon-spacer {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+}
+
+.titulo-app:hover {
+  cursor: pointer;
+}
+
+/* ==== Home ==== */
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-image: url("https://cdn.pixabay.com/photo/2020/05/29/03/00/portuguese-5233295_640.jpg");
+  min-height: 800px;
+}
+
+.card-idioma {
+  max-width: 400px;
+  max-height: 350px;
+  border-radius: 20px;
+  margin: 5px;
+  margin-top: 40px;
+  background-color: lightgray;
+}
+
+.image-size {
+  height: 200px;
+  width: 300px;
+}
+
+/*español card*/
+.container-card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.example-card {
+  min-width: 500px;
+  max-height: 450px;
+  border-radius: 20px;
+  margin: 5px;
+  margin-top: 40px;
+  background-color: #ecad50;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+.cursor:hover {
+  background-color: #deadff;
+}
+
+.buttons-spacingtop {
+  margin-top: 40px;
+}
+
+.text-subr {
+  -webkit-text-decoration: underline black;
+          text-decoration: underline black;
+}
+
+.table-center {
+  margin: auto;
+}
+
+.mat-card-header {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+/*ingles card*/
+.text-center {
+  text-align: center;
+  margin: auto;
+}
+
+.card-title {
+  font-size: 30px;
+  padding-bottom: 15px;
+  -webkit-text-decoration: underline black;
+          text-decoration: underline black;
+}
+
+/*ingles lista*/
+.buttons-center {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.button-scaled {
+  -webkit-transform: scale(0.8);
+          transform: scale(0.8);
+}
+
+.buttons-search {
+  margin-left: 10px;
+}
+
+.buttons-add {
+  margin-top: 40px;
+}
+
+.buttons-size {
+  width: 30px;
+}
+
+.button-marginleft {
+  margin-left: 10px;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-raised-button.mat-success {
+  color: white;
+  background-color: #155724;
+}
+
+h2 {
+  font-size: 50px;
+}
+
+.text-margintop {
+  margin-top: 30px;
+}
+
+.text-bold {
+  font-size: 16px;
+  font-weight: bold;
+  color: black;
+}
+
+.buscador-container {
+  padding-top: 50px;
+  padding-bottom: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+/*# sourceMappingURL=components.css.map */

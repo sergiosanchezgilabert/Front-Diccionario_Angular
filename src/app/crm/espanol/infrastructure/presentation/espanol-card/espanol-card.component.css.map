@@ -1,0 +1,11 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "espanol-card.component.scss",
+        "../../../../../../assets/styles/base.scss",
+        "../../../../../../assets/styles/settings.scss"
+    ],
+    "names": [],
+    "file": "espanol-card.component.css"
+}

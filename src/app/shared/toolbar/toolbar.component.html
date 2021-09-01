@@ -1,15 +1,19 @@
-<mat-toolbar color="primary">
-    <mat-toolbar-row>
-        <span (click)="inicio()" class="titulo-app">Diccionario</span>
-        <span class="icon-spacer"></span>
+<mat-toolbar color="primary" class="main-header">
+    <mat-toolbar-row class="main-header-content">
+        <span (click)="inicio()" class="main-header_title">Diccionario</span>
+        <span class="main-header_icons-spacer"></span>
         <abbr title="Español">
-        <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" (click)="espanolOn()">
-            <img src="https://image.flaticon.com/icons/png/512/197/197593.png" width="30px" />
-        </button></abbr>
+            <button mat-icon-button class="main-header_icon" aria-label="Español"
+                (click)="espanolOn()">
+                <img class="main-header_icon-img" src="https://image.flaticon.com/icons/png/512/197/197593.png"/>
+            </button>
+        </abbr>
         <abbr title="Ingles">
-        <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" (click)="inglesOn()">
-            <img src="https://image.flaticon.com/icons/png/512/323/323329.png" width="30px" />
-        </button></abbr>
+            <button mat-icon-button class="main-header_icon" aria-label="Ingles"
+                (click)="inglesOn()">
+                <img class="main-header_icon-img" src="https://image.flaticon.com/icons/png/512/323/323329.png"/>
+            </button>
+        </abbr>
     </mat-toolbar-row>
 </mat-toolbar>
 

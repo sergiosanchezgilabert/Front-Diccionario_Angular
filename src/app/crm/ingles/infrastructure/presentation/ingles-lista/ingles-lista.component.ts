@@ -1,14 +1,10 @@
 import { DatePipe } from '@angular/common';
-import { ChangeDetectorRef, Component, OnChanges, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { EspanolWeb } from 'src/app/crm/espanol/domain/IEspanolWeb';
-import { DialogBuscadorComponent } from 'src/app/crm/espanol/infrastructure/presentation/dialog-buscador/dialog-buscador.component';
-import { DialogEspanolComponent } from 'src/app/crm/espanol/infrastructure/presentation/dialog-espanol/dialog-espanol.component';
-import { EspanolService } from 'src/app/crm/espanol/infrastructure/service/espanol-service';
 import Swal from 'sweetalert2';
 import { Ingles } from '../../../domain/I-Ingles';
 import { InglesWeb } from '../../../domain/I-InglesWeb';
@@ -26,7 +22,13 @@ export class InglesListaComponent implements OnInit {
 
   options: string[] = []
 
-  displayedColumns: string[] = ['Id', 'Name', 'Traduction', 'CreateDate', 'ModifyDate', 'Action'];
+  displayedColumns: string[] = ['Id', 'Name', 'Traduction', 'CreateDate', 'ModifyDate', 'Action']
+
+  myControl = new FormControl()
+
+  idioma: string
+
+  filteredOptions: Observable<string[]>
 
   constructor(private service: InglesService, public dialog: MatDialog,
     public datepipe: DatePipe, public router: Router
@@ -50,7 +52,6 @@ export class InglesListaComponent implements OnInit {
           this.lista_ingles_web[i].fechaModificacion = this.datepipe.transform(this.lista_ingles_web[i].fechaModificacion, 'dd/MM/yyyy')
         }
         this.cargarDatosBuscador()
-
       }
     )
 
@@ -96,21 +97,18 @@ export class InglesListaComponent implements OnInit {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      cancelButtonText: 'Cancelar',
-      confirmButtonText: 'Si, eliminalo!'
+      cancelButtonText: 'Cancel',
+      confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
         this.service.borrar(palabra.palabra)
           .subscribe(resp => {
-            console.log('aqui llego bien')
             Swal.fire(
               'Delete!',
               'This word has been deleted.',
               'success'
             )
-            console.log('aqui llego bien')
             for (let i = 0; i < this.lista_ingles_web.length; i++) {
-              console.log('Comparando: ' + palabra.id + ' // ' + this.lista_ingles_web[i].id)
               if (palabra.id == this.lista_ingles_web[i].id) {
                 this.lista_ingles_web.splice(i, 1)
                 this.getDatos()
@@ -128,47 +126,14 @@ export class InglesListaComponent implements OnInit {
     this.router.navigate(['espanol', palabra]);
   }
 
-  buscador(options: string[]) {
-
-    const dialogRef = this.dialog.open(DialogBuscadorComponent, {
-      width: '250px',
-      height: '200px',
-      data: { options: options, idioma: 'ingles' }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      if (result !== undefined) {
-      }
-    });
-  }
-
-
-
-
-  myControl = new FormControl();
-  idioma: string
-  filteredOptions: Observable<string[]>;
-
-
   private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
+    const filterValue = value.toLowerCase()
 
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
 
   buscarOn(palabra: string) {
-    this.router.navigate(['ingles', palabra])
+    if (palabra !== '')
+      this.router.navigate(['ingles', palabra])
   }
-
-
-
-
-
-
-
-
-
-
-
 }

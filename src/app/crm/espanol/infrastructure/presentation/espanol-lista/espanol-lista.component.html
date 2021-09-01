@@ -1,77 +1,80 @@
 <h2 class="text text-center text-margintop">Bienvenido al diccionario de español</h2>
 
-<form class="buscador-container">
-    <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Buscar Palabra</mat-label>
-        <input #palabra type="text" placeholder="Escoge una" class="palabra" name="palabra" id="palabra" aria-label="palabra" matInput [formControl]="myControl"
-            [matAutocomplete]="auto">
-        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                {{option}}
-            </mat-option>
-        </mat-autocomplete>
-    </mat-form-field>
-    <br />
-    <div class="buttons buttons-center buttons-search">
-        <button mat-raised-button color="primary" (click)="buscarOn(palabra.value)">Buscar</button>
-    </div>
-</form>
+<div *ngIf="lista_espanol.length > 0 else nopalabras">
+    <form class="search">
+        <mat-form-field class="search_field" appearance="fill">
+            <mat-label>Buscar Palabra</mat-label>
+            <input #palabra type="text" placeholder="Escoge una" class="palabra" name="palabra" id="palabra"
+                aria-label="palabra" matInput [formControl]="myControl" [matAutocomplete]="auto">
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                    {{option}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+        <br />
+        <div class="buttons buttons-center buttons-search">
+            <button mat-raised-button color="primary" (click)="buscarOn(palabra.value)">Buscar</button>
+        </div>
+    </form>
 
-<table mat-table [dataSource]="lista_espanol" class="mat-elevation-z8" *ngIf="lista_espanol.length > 0 else nopalabras">
+    <table mat-table [dataSource]="lista_espanol" class="table mat-elevation-z8">
 
-    <ng-container matColumnDef="Id">
-        <th mat-header-cell *matHeaderCellDef class="text text-bold text-center"> Id </th>
-        <td mat-cell *matCellDef="let element" class="text text-center"> {{element.id}} </td>
-    </ng-container>
+        <ng-container class="table_column" matColumnDef="Id">
+            <th mat-header-cell *matHeaderCellDef class="text text-bold text-center"> Id </th>
+            <td mat-cell *matCellDef="let element" class="text text-center"> {{element.id}} </td>
+        </ng-container>
 
-    <ng-container matColumnDef="Nombre">
-        <th mat-header-cell *matHeaderCellDef class="text text-bold text-center"> Nombre </th>
-        <td mat-cell *matCellDef="let element" class="text text-center"> {{element.palabra}} </td>
-    </ng-container>
+        <ng-container class="table_column" matColumnDef="Nombre">
+            <th mat-header-cell *matHeaderCellDef class="text text-bold text-center"> Nombre </th>
+            <td mat-cell *matCellDef="let element" class="text text-center"> {{element.palabra}} </td>
+        </ng-container>
 
-    <ng-container matColumnDef="Descripcion">
-        <th mat-header-cell *matHeaderCellDef class="text text-bold text-center"> Descripcion </th>
-        <td mat-cell *matCellDef="let element" class="text text-center"> {{element.descripcion}} </td>
-    </ng-container>
+        <ng-container class="table_column" matColumnDef="Descripcion">
+            <th mat-header-cell *matHeaderCellDef class="text text-bold text-center"> Descripcion </th>
+            <td mat-cell *matCellDef="let element" class="text text-center"> {{element.descripcion}} </td>
+        </ng-container>
 
-    <ng-container matColumnDef="FechaCreacion">
-        <th mat-header-cell *matHeaderCellDef class="text text-bold text-center"> Fecha Creacion </th>
-        <td mat-cell *matCellDef="let element" class="text text-center"> {{element.fechaAlta}} </td>
-    </ng-container>
+        <ng-container class="table_column" matColumnDef="FechaCreacion">
+            <th mat-header-cell *matHeaderCellDef class="text text-bold text-center"> Fecha Creacion </th>
+            <td mat-cell *matCellDef="let element" class="text text-center"> {{element.fechaAlta}} </td>
+        </ng-container>
 
-    <ng-container matColumnDef="Action">
-        <th mat-header-cell *matHeaderCellDef class="text text-bold text-center"> Action </th>
-        <td mat-cell *matCellDef="let element" class="text text-center">
-            <button mat-fab color="primary" (click)="editarOn(element)" class="button button-scaled">
-                <mat-icon> border_color</mat-icon>
-            </button>
-            <button mat-fab color="warn" (click)="borrarOn(element)" class="button button-marginleft button-scaled">
-                <mat-icon>delete</mat-icon>
-            </button>
-        </td>
-    </ng-container>
+        <ng-container class="table_column" matColumnDef="Action">
+            <th mat-header-cell *matHeaderCellDef class="text text-bold text-center"> Action </th>
+            <td mat-cell *matCellDef="let element" class="text text-center">
+                <button mat-fab color="primary" (click)="editarOn(element)" class="button button-scaled">
+                    <mat-icon> border_color</mat-icon>
+                </button>
+                <button mat-fab color="warn" (click)="borrarOn(element)" class="button button-marginleft button-scaled">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
 
-    <ng-container matColumnDef="Mas Info">
-        <th mat-header-cell *matHeaderCellDef class="text text-bold text-center"> Mas Info </th>
-        <td mat-cell *matCellDef="let element" class="text text-center">
-            <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon"
-            (click)="detallesOn(element)" >
-                <img src="https://image.flaticon.com/icons/png/512/323/323329.png" width="35px" />
-            </button>
-        </td>
-    </ng-container>
+        <ng-container class="table_column" matColumnDef="Mas Info">
+            <th mat-header-cell *matHeaderCellDef class="text text-bold text-center"> Mas Info </th>
+            <td mat-cell *matCellDef="let element" class="text text-center">
+                <button mat-fab color="accent" (click)="detallesOn(element)"
+                    class="button button-marginleft button-scaled">
+                    <mat-icon>remove_red_eye</mat-icon>
+                </button>
+            </td>
+        </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
 
 <div class="buttons buttons-center buttons-add">
-    <button mat-raised-button color="success" (click)="aniadirOn()">
+    <button mat-raised-button class="button button-green" (click)="aniadirOn()">
         <mat-icon>library_add</mat-icon> Añadir palabra
     </button>
 </div>
 
 <ng-template #nopalabras>
     <br>
-    <h2 class="centrar">No hay palabras que mostrar</h2>
+    <p class="image-center image-margintop"><iframe src="https://giphy.com/embed/uDRezGbZW1uo0" width="480" height="269" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></p>
+    <h3 class="text-center">No hay palabras que mostrar</h3>
 </ng-template>

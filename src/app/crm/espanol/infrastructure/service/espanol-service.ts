@@ -1,7 +1,6 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { EMPTY, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
 import { Espanol } from '../../domain/IEspanol';
 import { EspanolWeb } from '../../domain/IEspanolWeb';
@@ -14,13 +13,7 @@ export class EspanolService {
   baseUrl = environment.baseUrl
   objeto = environment.espanol
 
-  errorHandler(error: HttpErrorResponse) {
-    return Observable.throw(error.message || "server error.");
-  }
-
-  constructor(private http: HttpClient) {
-    console.log('personas services listo')
-  }
+  constructor(private http: HttpClient) { }
 
   cargarTodos(): Observable<Array<EspanolWeb>> {
     const url = this.baseUrl + this.objeto;
@@ -29,6 +22,10 @@ export class EspanolService {
   }
 
   aniadir(palabra: Espanol): Observable<Object> {
+
+    if(palabra.palabra===''){
+      return EMPTY
+    }
 
     const url = this.baseUrl + this.objeto
 
@@ -50,9 +47,9 @@ export class EspanolService {
     return this.http.delete(url);
   }
 
-  getPalabra(palabra:string | null):Observable<EspanolWeb>{
+  getPalabra(palabra: string | null): Observable<EspanolWeb> {
     const url = this.baseUrl + this.objeto + palabra
 
-    return this.http.get<EspanolWeb>(url).pipe(catchError(this.errorHandler))
+    return this.http.get<EspanolWeb>(url)
   }
 }

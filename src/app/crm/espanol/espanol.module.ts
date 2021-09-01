@@ -4,22 +4,19 @@ import { EspanolListaComponent } from './infrastructure/presentation/espanol-lis
 import { DialogEspanolComponent } from './infrastructure/presentation/dialog-espanol/dialog-espanol.component';
 import { MaterialModule } from 'src/app/shared/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { DialogBuscadorComponent } from './infrastructure/presentation/dialog-buscador/dialog-buscador.component';
 import { CommonModule } from '@angular/common';
 
 const routes: Routes = [
   {
-      path: '',
-      component: EspanolListaComponent
-    
+    path: '',
+    component: EspanolListaComponent
   }
 ];
 
 @NgModule({
   declarations: [
     EspanolListaComponent,
-    DialogEspanolComponent,
-    DialogBuscadorComponent
+    DialogEspanolComponent
   ],
   imports: [
     CommonModule,
@@ -28,6 +25,6 @@ const routes: Routes = [
     ReactiveFormsModule,
 
   ],
-  exports:[RouterModule]
+  exports: [RouterModule]
 })
 export class EspanolModule { }

@@ -18,24 +18,22 @@ export class EspanolCardComponent implements OnInit {
 
   palabra: EspanolWeb
 
-  @Output() propagar = new EventEmitter<number>();
-
   constructor(public dialog: MatDialog, private service: EspanolService,
-    private route: ActivatedRoute, private router:Router, public datepipe:DatePipe) { }
+    private route: ActivatedRoute, private router: Router, public datepipe: DatePipe) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((param) => {
       this.service.getPalabra(param.get("palabra"))
         .subscribe((resp) => {
           this.palabra = resp
-          
-          this.palabra.fechaAlta=this.datepipe.transform(this.palabra.fechaAlta, 'dd/MM/yyyy')
+
+          this.palabra.fechaAlta = this.datepipe.transform(this.palabra.fechaAlta, 'dd/MM/yyyy')
           this.palabra.fechaModificacion = this.datepipe.transform(this.palabra.fechaModificacion, 'dd/MM/yyyy')
         });
     });
   }
 
-  editarOn(palabra: any) {
+  editarOn(palabra: EspanolWeb) {
     const dialogRef = this.dialog.open(DialogEspanolComponent, {
       width: '250px',
       data: { palabras: palabra }
@@ -69,18 +67,17 @@ export class EspanolCardComponent implements OnInit {
               'Esta palabra ha sido elimada.',
               'success'
             )
-            this.propagar.emit(this.palabra.id)
           })
       }
     })
   }
 
-  volverOn(){
+  volverOn() {
     this.router.navigate(['espanol']);
   }
 
-  inglesOn(element:InglesWeb){
-    this.router.navigate(['ingles',element.palabra]);
+  inglesOn(element: InglesWeb) {
+    this.router.navigate(['ingles', element.palabra]);
   }
 
 }

@@ -1,0 +1,188 @@
+@import "base";
+@import "settings";
+
+/* ==== Iconos Toolbar ==== */
+.main-header_icons-spacer {
+    flex: 1 1 auto;
+}
+
+.main-header_icon-img {
+    width: 30px;
+}
+
+/* ==== Cursor Tittle Toolbar ==== */
+.main-header_title:hover {
+    cursor: pointer;
+}
+
+/* ==== Varias tarjetas ==== */
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    background-image: $background-image-home;
+
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    min-height: 800px;
+}
+
+/* ==== Cualquier tarjeta ==== */
+.card {
+    display: flex;
+    justify-content: center;
+}
+
+/* ==== Tarjeta de palabra ==== */
+.word-card_header {
+    justify-content: center;
+}
+.word-card_title {
+    font-size: 30px;
+    padding-bottom: 15px;
+    text-decoration: $color-negro-subrayado;
+}
+
+/* ==== Tarjeta Idioma ==== */
+.card-idioma {
+    max-width: 400px;
+    max-height: 350px;
+    border-radius: 20px;
+    margin: 70px;
+    margin-top: 150px;
+
+    background: rgba(212, 212, 212, 0.9);
+}
+
+/* ==== Imagen Tarjeta Idioma ==== */
+.image-size_idioma {
+    height: 200px;
+    width: 300px;
+}
+
+/* ==== Tarjeta de palabra ==== */
+.word-card {
+    min-width: 500px;
+    max-height: 450px;
+    border-radius: 20px;
+    margin: 5px;
+    margin-top: 40px;
+    background-color: $background-card-palabra;
+}
+
+/* ==== Cursor para la seleccion de un enlace ==== */
+.cursor {
+    cursor: pointer;
+}
+
+/* ==== Color de hover para la seleccion de un enlace ==== */
+.cursor:hover {
+    background-color: $hover-color-link-palabra;
+}
+
+/* ==== Botones ==== */
+/* ==== Botones centrado ==== */
+.buttons-center {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* ==== Botones escalado ==== */
+.button-scaled {
+    transform: $scalado-button;
+}
+
+/* ==== Botones buscar ==== */
+.buttons-search {
+    margin-left: 10px;
+}
+
+/* ==== Tamaño Botones ==== */
+.buttons-size {
+    width: 30px;
+}
+
+/* ==== Botones margen izq ==== */
+.button-marginleft {
+    margin-left: 10px;
+}
+
+/* ==== Botones margen arriba ==== */
+.buttons-margintop {
+    margin-top: 40px;
+}
+
+/* ==== Boton verde y fondo blanco ==== */
+.button-green {
+    color: $color-text-button;
+    background-color: $background-color-button-success;
+}
+
+/* ==== Texto ==== */
+/* ==== Texto subrayado ====*/
+.text-subr {
+    text-decoration: $color-negro-subrayado;
+}
+
+/* ==== Texto margen arriba ====*/
+.text-margintop {
+    margin-top: 30px;
+}
+
+/* ==== Texto margen arriba ====*/
+.text-paddingtop {
+    padding-top: 30px;
+}
+
+/* ==== Texto negrita ====*/
+.text-bold {
+    font-size: 16px;
+    font-weight: bold;
+    color: $color-negro;
+}
+
+/* ==== Texto centrado ====*/
+.text-center {
+    text-align: center;
+    margin: auto;
+}
+
+/* ==== Texto tamaño error ====*/
+.text-size_error{
+    font-size: 60px;
+}
+
+/* ==== Tabla ====*/
+/* ==== Tabla centrada ====*/
+.table-center {
+    margin: auto;
+}
+
+/* Buscador */
+.search {
+    padding-top: 50px;
+    padding-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ==== Imagen centrada ====*/
+.image-center {
+text-align: center;
+}
+
+/* ==== Imagen margen arriba ====*/
+.image-margintop{
+    margin-top: 40px;
+}
+
+/* ==== Imagen tamaño cuando no hay palabras ====*/
+.image-size_nopalabras {
+    width: 480px;
+    height: 270px;
+}

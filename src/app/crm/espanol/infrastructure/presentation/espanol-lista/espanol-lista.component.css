@@ -1,0 +1,78 @@
+.buttons-center {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.buttons-search {
+  margin-left: 10px;
+}
+
+.buttons-add {
+  margin-top: 40px;
+}
+
+.buttons-size {
+  width: 30px;
+}
+
+.button-marginleft {
+  margin-left: 10px;
+}
+
+.button-scaled {
+  -webkit-transform: scale(0.8);
+          transform: scale(0.8);
+}
+
+.container-card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-raised-button.mat-success {
+  color: #f0fff3;
+  background-color: #155724;
+}
+
+.text-center {
+  text-align: center;
+}
+
+h2 {
+  font-size: 50px;
+}
+
+.text-margintop {
+  margin-top: 30px;
+}
+
+.text-bold {
+  font-size: 16px;
+  font-weight: bold;
+  color: black;
+}
+
+.buscador-container {
+  padding-top: 50px;
+  padding-bottom: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+/*# sourceMappingURL=espanol-lista.component.css.map */

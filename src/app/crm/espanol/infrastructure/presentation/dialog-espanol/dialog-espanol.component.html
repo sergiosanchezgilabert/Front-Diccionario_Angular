@@ -1,22 +1,24 @@
-<mat-sidenav-container>
-    <mat-sidenav-content>
-        <form [formGroup]="formEspanol">
+<mat-sidenav-container class="dialog-sidenav">
+    <mat-sidenav-content class="dialog-sidenav-content">
+        <form [formGroup]="formEspanol" class="dialog-sidenav_form">
 
-            <mat-form-field class="example-full-width" >
+            <mat-form-field class="dialog-sidenav_form-field">
                 <input *ngIf="editando==true" matInput placeholder="palabra" formControlName="palabra" readonly>
                 <input *ngIf="editando==false" matInput placeholder="palabra" formControlName="palabra">
             </mat-form-field>
 
-            <mat-form-field class="example-full-width">
+            <mat-form-field class="dialog-sidenav_form-field">
                 <input matInput placeholder="descripcion" formControlName="descripcion">
             </mat-form-field>
 
-            <div *ngIf="!formEspanol.valid">
+            <div *ngIf="!formEspanol.valid" class="dialog-sidenav_form-invalid">
                 Palabra y Descripcion son requeridos.
             </div>
 
-            <button mat-raised-button color="primary" (click)="enviar()">Enviar</button>
-            <button mat-raised-button color="primary" (click)="cancelar()">Cancelar</button>
+            <div class="buttons">
+                <button mat-raised-button color="primary" (click)="enviar()">Enviar</button>
+                <button mat-raised-button color="primary" (click)="cancelar()">Cancelar</button>
+            </div>
 
         </form>
     </mat-sidenav-content>

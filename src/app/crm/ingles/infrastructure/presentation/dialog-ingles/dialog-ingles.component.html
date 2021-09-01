@@ -1,22 +1,24 @@
-<mat-sidenav-container>
-    <mat-sidenav-content>
-        <form [formGroup]="formIngles">
+<mat-sidenav-container class="dialog-sidenav">
+    <mat-sidenav-content class="dialog-sidenav-content">
+        <form [formGroup]="formIngles" class="dialog-sidenav_form">
 
-            <mat-form-field class="example-full-width">
+            <mat-form-field class="dialog-sidenav_form-field">
                 <input *ngIf="editando==false" matInput placeholder="word" formControlName="palabra">
                 <input *ngIf="editando==true" matInput placeholder="word" formControlName="palabra" readonly>
             </mat-form-field>
 
-            <mat-form-field class="example-full-width">
+            <mat-form-field class="dialog-sidenav_form-field">
                 <input matInput placeholder="Spanish word" formControlName="palabraEspanol">
             </mat-form-field>
 
-            <div *ngIf="!formIngles.valid">
+            <div *ngIf="!formIngles.valid" class="dialog-sidenav_form-invalid">
                 Word and Spanish word is required.
             </div>
 
-            <button mat-raised-button color="primary" (click)="enviar()">Enviar</button>
-            <button mat-raised-button color="primary" (click)="cancelar()">Cancelar</button>
+            <div class="buttons">
+                <button mat-raised-button color="primary" (click)="enviar()">Enviar</button>
+                <button mat-raised-button color="primary" (click)="cancelar()">Cancelar</button>
+            </div>
 
         </form>
     </mat-sidenav-content>

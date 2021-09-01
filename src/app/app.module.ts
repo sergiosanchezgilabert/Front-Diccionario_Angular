@@ -14,7 +14,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ErrorComponent } from './shared/error/error.component';
 import { GlobalErrorHandlerService } from './shared/error/service/global-error-handler-service';
-import { InterceptorService } from './crm/interceptor.service';
+import { InterceptorService } from './shared/interceptor/interceptor.service';
 
 @NgModule({
   declarations: [

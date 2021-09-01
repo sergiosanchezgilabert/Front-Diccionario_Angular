@@ -1,11 +1,11 @@
-<div class="container-card">
-    <mat-card class="example-card" *ngIf="palabra !== undefined  else nopalabra">
-        <mat-card-header>
-            <mat-card-title class="text text-center card-title">{{palabra?.palabra}}</mat-card-title>
+<div class="card">
+    <mat-card class="word-card" *ngIf="palabra !== undefined  else nopalabra">
+        <mat-card-header class="word-card_header">
+            <mat-card-title class="text text-center word-card_title">{{palabra?.palabra}}</mat-card-title>
         </mat-card-header>
-        <mat-card-content class="text text-center">
+        <mat-card-content class="word-card_content text text-center">
             <p>Date Added: {{palabra?.fechaAlta}}</p>
-            <p>Date Modify: {{palabra?.fechaModificacion}}</p>
+            <p *ngIf="palabra?.fechaModificacion==''">Date Modify: {{palabra?.fechaModificacion}}</p>
                 <p class="cursor">
                     Translation: 
                 <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon"
@@ -18,14 +18,14 @@
     </mat-card>
 </div>
 
-<mat-card-actions class="buttons buttons-center buttons-spacingtop">
-    <button mat-raised-button color="primary" (click)="volverOn()">
+<mat-card-actions class="buttons buttons-center buttons-margintop">
+    <button mat-raised-button color="primary" class="button" (click)="volverOn()">
         <mat-icon>arrow_back</mat-icon>
         BACK
     </button>
 </mat-card-actions>
 
-<ng-template #nopalabra>
+<ng-template class="empty" #nopalabra>
     <br>
     <h2 class="centrar">There aren´t any words to show</h2>
 </ng-template>

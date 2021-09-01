@@ -1,7 +1,6 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
 import { Ingles } from '../../domain/I-Ingles';
 import { InglesWeb } from '../../domain/I-InglesWeb';
@@ -14,9 +13,7 @@ export class InglesService {
   baseUrl = environment.baseUrl
   objeto = environment.ingles
 
-  constructor(private http: HttpClient) {
-    console.log('personas services listo')
-  }
+  constructor(private http: HttpClient) { }
 
   cargarTodos(): Observable<Array<InglesWeb>> {
     const url = this.baseUrl + this.objeto;
@@ -24,7 +21,7 @@ export class InglesService {
     return this.http.get<Array<InglesWeb>>(url)
   }
 
-  aniadir(palabra: Ingles): Observable<any> {
+  aniadir(palabra: Ingles): Observable<Object> {
 
     const url = this.baseUrl + this.objeto
 
@@ -37,12 +34,12 @@ export class InglesService {
 
     console.log('URL ' + url)
 
-    return this.http.put(url, ingles);
+    return this.http.put(url, ingles)
   }
 
   borrar(palabra: string): Observable<Object> {
 
-    const url = this.baseUrl + this.objeto + palabra;
+    const url = this.baseUrl + this.objeto + palabra
 
     console.log(url)
 
@@ -52,7 +49,7 @@ export class InglesService {
     })
   }
 
-  getPalabra(palabra:string | null):Observable<InglesWeb>{
+  getPalabra(palabra: string | null): Observable<InglesWeb> {
     const url = this.baseUrl + this.objeto + palabra
 
     return this.http.get<InglesWeb>(url)

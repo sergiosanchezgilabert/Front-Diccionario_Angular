@@ -9,7 +9,6 @@ import Swal from 'sweetalert2';
 import { Espanol } from '../../../domain/IEspanol';
 import { EspanolWeb } from '../../../domain/IEspanolWeb';
 import { EspanolService } from '../../service/espanol-service';
-import { DialogBuscadorComponent } from '../dialog-buscador/dialog-buscador.component';
 import { DialogEspanolComponent } from '../dialog-espanol/dialog-espanol.component';
 
 @Component({
@@ -25,10 +24,14 @@ export class EspanolListaComponent implements OnInit {
 
   displayedColumns: string[] = ['Id', 'Nombre', 'Descripcion', 'FechaCreacion', 'Action', 'Mas Info'];
 
-  constructor(private service: EspanolService, public dialog: MatDialog,
-    public datepipe: DatePipe, public router: Router) {
+  myControl = new FormControl()
 
-  }
+  idioma: string
+
+  filteredOptions: Observable<string[]>
+
+  constructor(private service: EspanolService, public dialog: MatDialog,
+    public datepipe: DatePipe, public router: Router) { }
 
   ngOnInit() {
 
@@ -41,6 +44,12 @@ export class EspanolListaComponent implements OnInit {
       startWith(''),
       map(value => this._filter(value))
     );
+  }
+
+  _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
 
   getDatos() {
@@ -103,7 +112,6 @@ export class EspanolListaComponent implements OnInit {
               'success'
             )
             for (let i = 0; i < this.lista_espanol.length; i++) {
-              console.log('Comparando: ' + palabra.id + ' // ' + this.lista_espanol[i].id)
               if (palabra.id == this.lista_espanol[i].id) {
                 this.lista_espanol.splice(i, 1)
                 this.getDatos()
@@ -121,46 +129,9 @@ export class EspanolListaComponent implements OnInit {
     this.router.navigate(['espanol', palabra]);
   }
 
-  buscador(options: string[]) {
-
-    const dialogRef = this.dialog.open(DialogBuscadorComponent, {
-      width: '250px',
-      height: '200px',
-      data: { options: options }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      if (result !== undefined) {
-      }
-    });
-  }
-
-
-
-
-
-
-
-
-  myControl = new FormControl();
-  idioma: string
-  filteredOptions: Observable<string[]>;
-
-
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
-  }
-
   buscarOn(palabra: string) {
-    this.router.navigate(['espanol', palabra])
+    if (palabra !== '')
+      this.router.navigate(['espanol', palabra])
   }
-
-
-
-
-
 
 }

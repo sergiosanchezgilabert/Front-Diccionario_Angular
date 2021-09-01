@@ -1,0 +1,11 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "home.component.scss",
+        "../../../assets/styles/base.scss",
+        "../../../assets/styles/settings.scss"
+    ],
+    "names": [],
+    "file": "home.component.css"
+}

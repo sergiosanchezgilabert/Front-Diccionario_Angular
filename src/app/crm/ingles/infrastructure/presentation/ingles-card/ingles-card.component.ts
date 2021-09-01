@@ -16,7 +16,6 @@ export class InglesCardComponent implements OnInit {
 
   palabra: InglesWeb
 
-  @Output() propagar = new EventEmitter<number>();
 
   constructor(public dialog: MatDialog, private service: InglesService,
     private route: ActivatedRoute, private router: Router, public datepipe: DatePipe) { }
@@ -67,7 +66,6 @@ export class InglesCardComponent implements OnInit {
               'Esta palabra ha sido elimada.',
               'success'
             )
-            this.propagar.emit(this.palabra.id)
           })
       }
     })
@@ -80,6 +78,4 @@ export class InglesCardComponent implements OnInit {
   espanolOn(palabra: String) {
     this.router.navigate(['espanol', palabra]);
   }
-
-
 }

@@ -43,7 +43,7 @@ export class DialogEspanolComponent implements OnInit {
           Swal.fire({
             position: 'top',
             icon: 'success',
-            title: 'Estudiante editado',
+            title: 'Palabra editada',
             showConfirmButton: false,
             timer: 1500
           })
@@ -55,7 +55,7 @@ export class DialogEspanolComponent implements OnInit {
           Swal.fire({
             position: 'top',
             icon: 'success',
-            title: 'Estudiante añadido',
+            title: 'Palabra añadida',
             showConfirmButton: false,
             timer: 1500
           })
