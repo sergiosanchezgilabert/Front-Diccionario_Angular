@@ -34,23 +34,9 @@ export class InterceptorService implements HttpInterceptor {
             })
         }
 
-        if (error.status === 404) {
-            Swal.fire({
-                title: '<strong>Not find!</strong>',
-                icon: 'info',
-                showCloseButton: true,
-                showCancelButton: true,
-                focusConfirm: false,
-                confirmButtonText:
-                    '<i class="fa fa-thumbs-up"></i> Fantastic!',
-                confirmButtonAriaLabel: 'Thumbs up, great!',
-                cancelButtonText:
-                    '<i class="fa fa-thumbs-down"> Cancel</i>'
-            })
-        }
-
         console.log('Ocurrio un error')
         console.warn(error)
-        return throwError('Error personalizado')
+       // return throwError(error) ESTO MANDA AL SUBSCRIBE QUE COGE EL ERROR Y ALLI LO GESTIONAS PARA EVITAR QUE HAGA COSAS  RARAS
+        return throwError(error)
     }
 }

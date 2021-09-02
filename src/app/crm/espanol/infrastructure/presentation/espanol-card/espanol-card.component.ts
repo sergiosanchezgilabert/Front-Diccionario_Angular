@@ -33,8 +33,24 @@ export class EspanolCardComponent implements OnInit {
           this.palabra.fechaModificacion = this.datepipe.transform(this.palabra.fechaModificacion, 'dd/MM/yyyy')
 
           if(this.palabra.palabrasIngles.length!=0) this.arryVacio=false
-        });
-    });
+        },
+        error=>{if (error.status === 404){
+          Swal.fire({
+            title: '<strong>Not find!</strong>',
+            icon: 'info',
+            showCloseButton: true,
+            showCancelButton: true,
+            focusConfirm: false,
+            confirmButtonText:
+                '<i class="fa fa-thumbs-up"></i> Fantastic!',
+            confirmButtonAriaLabel: 'Thumbs up, great!',
+            cancelButtonText:
+                '<i class="fa fa-thumbs-down"> Cancel</i>'
+        })
+        this.router.navigate(['espanol'])
+        }});
+    },
+     );
   }
 
   editarOn(palabra: EspanolWeb) {
