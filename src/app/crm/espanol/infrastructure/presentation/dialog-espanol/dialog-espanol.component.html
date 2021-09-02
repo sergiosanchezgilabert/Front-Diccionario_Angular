@@ -4,7 +4,7 @@
 
             <mat-form-field class="dialog-sidenav_form-field">
                 <input *ngIf="editando==true" matInput placeholder="palabra" formControlName="palabra" readonly>
-                <input *ngIf="editando==false" matInput placeholder="palabra" formControlName="palabra">
+                <input *ngIf="editando==false" matInput placeholder="palabra" formControlName="palabra" >
             </mat-form-field>
 
             <mat-form-field class="dialog-sidenav_form-field">
@@ -16,7 +16,7 @@
             </div>
 
             <div class="buttons">
-                <button mat-raised-button color="primary" (click)="enviar()">Enviar</button>
+                <button mat-raised-button color="primary" *ngIf="formEspanol.valid" (click)="enviar()">Enviar</button>
                 <button mat-raised-button color="primary" (click)="cancelar()">Cancelar</button>
             </div>
 

@@ -104,20 +104,28 @@ export class EspanolListaComponent implements OnInit {
       confirmButtonText: 'Si, eliminalo!'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.service.borrar(palabra.palabra)
-          .subscribe(resp => {
-            Swal.fire(
-              'Eliminado!',
-              'Esta palabra ha sido elimada.',
-              'success'
-            )
-            for (let i = 0; i < this.lista_espanol.length; i++) {
-              if (palabra.id == this.lista_espanol[i].id) {
-                this.lista_espanol.splice(i, 1)
-                this.getDatos()
+        if (palabra.palabrasIngles.length === 0) {
+          this.service.borrar(palabra.palabra)
+            .subscribe(resp => {
+              Swal.fire(
+                'Eliminado!',
+                'Esta palabra ha sido elimada.',
+                'success'
+              )
+              for (let i = 0; i < this.lista_espanol.length; i++) {
+                if (palabra.id == this.lista_espanol[i].id) {
+                  this.lista_espanol.splice(i, 1)
+                  this.getDatos()
+                }
               }
-            }
+            })
+        }else{
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Debes eliminar sus palabaras relacionadas en ingles!'
           })
+        }
       }
     })
   }
@@ -130,9 +138,10 @@ export class EspanolListaComponent implements OnInit {
   }
 
   buscarOn(palabra: string) {
-    if (palabra !== '')
+    if (palabra !== '') {
       this.service.getPalabra(palabra)
       this.router.navigate(['espanol', palabra])
+    }
   }
 
 }

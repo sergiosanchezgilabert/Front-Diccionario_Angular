@@ -17,8 +17,8 @@ export class DialogEspanolComponent implements OnInit {
   editando: boolean = false
 
   formEspanol: FormGroup = this.fb.group({
-    palabra: ['',Validators.required],
-    descripcion: ['',Validators.required]
+    palabra: ['',[Validators.required, Validators.pattern('[a-zA-Z]*')]], //Validators.pattern('[a-zA-Z]* ') Para permitir espacios
+    descripcion: ['', Validators.required]
   })
 
   constructor(public dialogRef: MatDialogRef<DialogEspanolComponent>,
@@ -49,7 +49,7 @@ export class DialogEspanolComponent implements OnInit {
           })
           this.dialogRef.close(this.formEspanol.value);
         })
-    }else{
+    } else {
       this.espanolService.aniadir(this.formEspanol.value)
         .subscribe(() => {
           Swal.fire({

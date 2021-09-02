@@ -21,7 +21,7 @@ export class DialogInglesComponent implements OnInit {
   editando: boolean = false
 
   formIngles: FormGroup = this.fb.group({
-    palabra: ['', Validators.required],
+    palabra: ['', [Validators.required,, Validators.pattern('[a-zA-Z ]*')]],
     palabraEspanol: ['', Validators.required]
   })
 
