@@ -18,6 +18,8 @@ export class EspanolCardComponent implements OnInit {
 
   palabra: EspanolWeb
 
+  arryVacio:boolean=true
+
   constructor(public dialog: MatDialog, private service: EspanolService,
     private route: ActivatedRoute, private router: Router, public datepipe: DatePipe) { }
 
@@ -29,6 +31,8 @@ export class EspanolCardComponent implements OnInit {
 
           this.palabra.fechaAlta = this.datepipe.transform(this.palabra.fechaAlta, 'dd/MM/yyyy')
           this.palabra.fechaModificacion = this.datepipe.transform(this.palabra.fechaModificacion, 'dd/MM/yyyy')
+
+          if(this.palabra.palabrasIngles.length!=0) this.arryVacio=false
         });
     });
   }
