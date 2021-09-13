@@ -1,6 +1,8 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { LoginService } from 'src/app/auth/service/login.service';
 import Swal from 'sweetalert2';
 import { Espanol } from '../../../domain/IEspanol';
 import { EspanolService } from '../../service/espanol-service';
@@ -16,15 +18,32 @@ export class DialogEspanolComponent implements OnInit {
 
   editando: boolean = false
 
+  logueado = false
+
   formEspanol: FormGroup = this.fb.group({
     palabra: ['',[Validators.required, Validators.pattern('[a-zA-Z]*')]], //Validators.pattern('[a-zA-Z]* ') Para permitir espacios
     descripcion: ['', Validators.required]
   })
 
   constructor(public dialogRef: MatDialogRef<DialogEspanolComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any, public fb: FormBuilder, private espanolService: EspanolService) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, public fb: FormBuilder, 
+    private espanolService: EspanolService,private serviceLogin: LoginService,
+    private router:Router) { }
 
   ngOnInit(): void {
+    if (localStorage.getItem('username')!==null && localStorage.getItem('password')!==null) {
+      var username = localStorage.getItem('username')
+      var password = localStorage.getItem('password')
+      console.log(username+ ' '+password)
+      this.serviceLogin.getPersona(username, password).subscribe(then => {
+        if(then!==null){
+          this.logueado = true
+          console.log(then + 'Hola')
+        }
+      
+      })
+    }
+
     if (this.data !== null) {
       this.palabra = this.data.palabras
       this.formEspanol.patchValue(this.data.palabras)
@@ -34,6 +53,10 @@ export class DialogEspanolComponent implements OnInit {
 
   cancelar() {
     this.dialogRef.close()
+  }
+
+  login(){
+    this.router.navigateByUrl('');
   }
 
   enviar() {

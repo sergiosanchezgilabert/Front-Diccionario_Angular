@@ -1,13 +1,15 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { LoginService } from 'src/app/auth/service/login.service';
 import { Espanol } from 'src/app/crm/espanol/domain/IEspanol';
 import { EspanolWeb } from 'src/app/crm/espanol/domain/IEspanolWeb';
 import { EspanolService } from 'src/app/crm/espanol/infrastructure/service/espanol-service';
 import Swal from 'sweetalert2';
 import { Ingles } from '../../../domain/I-Ingles';
 import { InglesWeb } from '../../../domain/I-InglesWeb';
-import { InglesService } from '../../service/InglesService';
+import { InglesService } from '../../service/Ingles.service';
 
 @Component({
   selector: 'app-dialog-ingles',
@@ -20,21 +22,40 @@ export class DialogInglesComponent implements OnInit {
 
   editando: boolean = false
 
+  logueado = false
+
+  constructor(public dialogRef: MatDialogRef<DialogInglesComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any, public fb: FormBuilder,
+    private inglesService: InglesService, private espanolService: EspanolService,
+    private serviceLogin: LoginService,private router:Router) { }
+
   formIngles: FormGroup = this.fb.group({
     palabra: ['', [Validators.required,, Validators.pattern('[a-zA-Z ]*')]],
     palabraEspanol: ['', Validators.required]
   })
 
-  constructor(public dialogRef: MatDialogRef<DialogInglesComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any, public fb: FormBuilder,
-    private inglesService: InglesService, private espanolService: EspanolService) { }
-
   ngOnInit(): void {
+    if (localStorage.getItem('username')!==null && localStorage.getItem('password')!==null) {
+      var username = localStorage.getItem('username')
+      var password = localStorage.getItem('password')
+      console.log(username+ ' '+password)
+      this.serviceLogin.getPersona(username, password).subscribe(then => {
+        if(then!==null){
+          this.logueado = true
+          console.log(then + 'Hola')
+        }
+      
+      })
+    }
     if (this.data !== null) {
       this.palabraIngles = this.data.palabras
       this.formIngles.patchValue(this.data.palabras)
       this.editando = true
     }
+  }
+
+  login(){
+    this.router.navigateByUrl('');
   }
 
   cancelar() {

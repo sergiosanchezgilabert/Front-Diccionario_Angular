@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './shared/material/material.module';
 import { EspanolCardComponent } from './crm/espanol/infrastructure/presentation/espanol-card/espanol-card.component';
 import { InglesCardComponent } from './crm/ingles/infrastructure/presentation/ingles-card/ingles-card.component';
-import { ToolbarComponent } from './shared/toolbar/toolbar.component';
 import { HomeComponent } from './shared/home/home.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -15,15 +14,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ErrorComponent } from './shared/error/error.component';
 import { GlobalErrorHandlerService } from './shared/error/service/global-error-handler-service';
 import { InterceptorService } from './shared/interceptor/interceptor.service';
+import { HttpTestingController } from '@angular/common/http/testing';
+import { LoginComponent } from './auth/login/login.component';
+import { ToolbarComponent } from './shared/toolbar/toolbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EspanolCardComponent,
     InglesCardComponent,
-    ToolbarComponent,
     HomeComponent,
     ErrorComponent,
+    LoginComponent,
+    ToolbarComponent
     
   ],
   imports: [
@@ -32,9 +35,9 @@ import { InterceptorService } from './shared/interceptor/interceptor.service';
     ReactiveFormsModule,
     HttpClientModule,
     BrowserModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
-  providers: [DatePipe,{ provide: ErrorHandler, useClass: GlobalErrorHandlerService },{provide:HTTP_INTERCEPTORS,useClass:InterceptorService,multi:true}],
+  providers: [DatePipe,/*{ provide: ErrorHandler, useClass: GlobalErrorHandlerService },*/{provide:HTTP_INTERCEPTORS,useClass:InterceptorService,multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

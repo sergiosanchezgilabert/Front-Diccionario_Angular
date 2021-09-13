@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" *ngIf="logueado == true else nologin">
     <mat-card class="word-card" *ngIf="palabra !== undefined  else nopalabra">
         <mat-card-header class="word-card_header">
             <mat-card-title class="text text-center word-card_title">{{palabra?.palabra}}</mat-card-title>
@@ -15,8 +15,7 @@
                 <tr class="table_row cursor" *ngFor="let element of palabra.palabrasIngles">
                     <td>
                         {{element.palabra}}
-                        <button mat-icon-button class="button"
-                            (click)="inglesOn(element)">
+                        <button mat-icon-button class="button" (click)="inglesOn(element)">
                             <img src="https://image.flaticon.com/icons/png/512/323/323329.png" width="30px" />
                         </button>
                     </td>
@@ -25,16 +24,27 @@
 
         </mat-card-content>
     </mat-card>
+
+
+    <mat-card-actions class="buttons buttons-center buttons-margintop">
+        <button mat-raised-button color="primary" class="button" (click)="volverOn()">
+            <mat-icon>arrow_back</mat-icon>
+            BACK
+        </button>
+    </mat-card-actions>
+
+    <ng-template class="empty" #nopalabra>
+        <br>
+        <h2 class="centrar">No hay palabra que mostrar</h2>
+    </ng-template>
 </div>
 
-<mat-card-actions class="buttons buttons-center buttons-margintop">
-    <button mat-raised-button color="primary" class="button" (click)="volverOn()">
-        <mat-icon>arrow_back</mat-icon>
-        BACK
-    </button>
-</mat-card-actions>
-
-<ng-template class="empty" #nopalabra>
+<ng-template #nologin>
     <br>
-    <h2 class="centrar">No hay palabra que mostrar</h2>
+    <p class="image-center"><iframe src="https://giphy.com/embed/8TweEdaxxfuElKkRxz" width="480"
+         height="361" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></p>
+    <h1 class="text-center">Tienes que estar logueado</h1>
+    <div class="buttons buttons-center">
+        <button mat-raised-button color="primary" (click)="login()">LOGIN</button>
+    </div>
 </ng-template>

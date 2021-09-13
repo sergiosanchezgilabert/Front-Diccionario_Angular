@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLinkActive } from '@angular/router';
+import { LoginService } from 'src/app/auth/service/login.service';
 
 @Component({
   selector: 'app-home',
@@ -8,9 +9,23 @@ import { Router, RouterLinkActive } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  logueado = false
+
+  constructor(private router: Router,private serviceLogin: LoginService) { }
 
   ngOnInit(): void {
+    if (localStorage.getItem('username')!==null && localStorage.getItem('password')!==null) {
+      var username = localStorage.getItem('username')
+      var password = localStorage.getItem('password')
+      console.log(username+ ' '+password)
+      this.serviceLogin.getPersona(username, password).subscribe(then => {
+        if(then!==null){
+          this.logueado = true
+          console.log(then + 'Hola')
+        }
+      
+      })
+    }
   }
 
   ingles(){
@@ -19,6 +34,10 @@ export class HomeComponent implements OnInit {
 
   espanol(){
     this.router.navigateByUrl('espanol');
+  }
+
+  login(){
+    this.router.navigateByUrl('');
   }
 
 }

@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router, RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { LoginService } from 'src/app/auth/service/login.service';
 import Swal from 'sweetalert2';
 import { Espanol } from '../../../domain/IEspanol';
 import { EspanolWeb } from '../../../domain/IEspanolWeb';
@@ -28,13 +29,26 @@ export class EspanolListaComponent implements OnInit {
 
   idioma: string
 
+  logueado = false
+
   filteredOptions: Observable<string[]>
 
   constructor(private service: EspanolService, public dialog: MatDialog,
-    public datepipe: DatePipe, public router: Router) { }
+    public datepipe: DatePipe, public router: Router,private serviceLogin: LoginService) { }
 
   ngOnInit() {
-
+    if (localStorage.getItem('username')!==null && localStorage.getItem('password')!==null) {
+      var username = localStorage.getItem('username')
+      var password = localStorage.getItem('password')
+      console.log(username+ ' '+password)
+      this.serviceLogin.getPersona(username, password).subscribe(then => {
+        if(then!==null){
+          this.logueado = true
+          console.log(then + 'Hola')
+        }
+      
+      })
+    }
     this.getDatos()
 
   }
@@ -44,6 +58,10 @@ export class EspanolListaComponent implements OnInit {
       startWith(''),
       map(value => this._filter(value))
     );
+  }
+
+  login(){
+    this.router.navigateByUrl('');
   }
 
   _filter(value: string): string[] {
@@ -119,7 +137,7 @@ export class EspanolListaComponent implements OnInit {
                 }
               }
             })
-        }else{
+        } else {
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
@@ -134,7 +152,9 @@ export class EspanolListaComponent implements OnInit {
     let palabra: String
     palabra = element.palabra
 
-    this.router.navigate(['espanol', palabra]);
+    console.log(palabra)
+
+    this.router.navigate(['espanol/', palabra]);
   }
 
   buscarOn(palabra: string) {

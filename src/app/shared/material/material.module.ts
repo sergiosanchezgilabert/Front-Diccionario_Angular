@@ -10,7 +10,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table'  
-
+import { MatMenuModule } from '@angular/material/menu'  
+import { ToolbarComponent } from '../toolbar/toolbar.component';
 
 
 const materialModules = [
@@ -24,15 +25,16 @@ const materialModules = [
   MatFormFieldModule,
   MatAutocompleteModule,
   MatInputModule,
-  MatTableModule
+  MatTableModule,
+  MatMenuModule
 ];
 
 @NgModule({
   imports: [
-    ...materialModules
+    ...materialModules,
   ],
   exports: [
-    ...materialModules
+    ...materialModules,
   ],
 })
 export class MaterialModule {

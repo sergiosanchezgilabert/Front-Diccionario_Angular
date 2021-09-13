@@ -1,4 +1,4 @@
-<mat-sidenav-container class="dialog-sidenav">
+<mat-sidenav-container class="dialog-sidenav" *ngIf="logueado == true else nologin">
     <mat-sidenav-content class="dialog-sidenav-content">
         <form [formGroup]="formEspanol" class="dialog-sidenav_form">
 
@@ -23,3 +23,13 @@
         </form>
     </mat-sidenav-content>
 </mat-sidenav-container>
+
+<ng-template #nologin>
+    <br>
+    <p class="image-center"><iframe src="https://giphy.com/embed/8TweEdaxxfuElKkRxz" width="480"
+         height="361" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></p>
+    <h1 class="text-center">Tienes que estar logueado</h1>
+    <div class="buttons buttons-center">
+        <button mat-raised-button color="primary" (click)="login()">LOGIN</button>
+    </div>
+</ng-template>

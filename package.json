@@ -6,7 +6,10 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "postinstall": "ngcc",
+    "server": "cd API && npm run dev",
+    "dev": "concurrently \"npm run server\" \"npm run start\""
   },
   "private": true,
   "dependencies": {
@@ -20,6 +23,10 @@
     "@angular/platform-browser": "~12.2.0",
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
+    "concurrently": "^6.2.1",
+    "devextreme": "^21.1.5",
+    "devextreme-angular": "^21.1.5",
+    "devextreme-schematics": "^1.2.21",
     "rxjs": "~6.6.0",
     "sweetalert2": "^11.1.4",
     "tslib": "^2.3.0",
@@ -31,6 +38,8 @@
     "@angular/compiler-cli": "~12.2.0",
     "@types/jasmine": "~3.8.0",
     "@types/node": "^12.11.1",
+    "devextreme-cli": "latest",
+    "devextreme-themebuilder": "^21.1.5",
     "jasmine-core": "~3.8.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",

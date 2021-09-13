@@ -4,7 +4,6 @@ import { InglesListaComponent } from './infrastructure/presentation/ingles-lista
 import { MaterialModule } from 'src/app/shared/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { DialogEspanolComponent } from '../espanol/infrastructure/presentation/dialog-espanol/dialog-espanol.component';
 import { DialogInglesComponent } from './infrastructure/presentation/dialog-ingles/dialog-ingles.component';
 
 
@@ -19,7 +18,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     InglesListaComponent,
-    DialogInglesComponent
+    DialogInglesComponent,
   ],
   imports: [
     CommonModule,

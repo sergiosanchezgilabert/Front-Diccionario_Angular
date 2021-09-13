@@ -1,4 +1,9 @@
+import { DatePipe } from '@angular/common';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatDialogModule } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { MaterialModule } from 'src/app/shared/material/material.module';
 
 import { EspanolListaComponent } from './espanol-lista.component';
 
@@ -8,7 +13,19 @@ describe('EspanolListaComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EspanolListaComponent ]
+      declarations: [ EspanolListaComponent ],
+      imports: [      MatDialogModule,MaterialModule,
+        HttpClientTestingModule],
+        providers: [
+          {
+            provide: DatePipe,
+            useValue: {}
+          },
+          {
+            provide:Router,
+            useValue:{}
+          }
+       ],
     })
     .compileComponents();
   });

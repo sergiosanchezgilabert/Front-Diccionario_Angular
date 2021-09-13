@@ -1,8 +1,8 @@
-<mat-toolbar color="primary" class="main-header">
+<mat-toolbar color="primary" class="main-header" *ngIf="logueado==true">
     <mat-toolbar-row class="main-header-content">
         <span (click)="inicio()" class="main-header_title">Diccionario</span>
         <span class="main-header_icons-spacer"></span>
-        <abbr title="Español">
+        <abbr title="Español" >
             <button mat-icon-button class="main-header_icon" aria-label="Español"
                 (click)="espanolOn()">
                 <img class="main-header_icon-img" src="https://image.flaticon.com/icons/png/512/197/197593.png"/>
@@ -17,4 +17,3 @@
     </mat-toolbar-row>
 </mat-toolbar>
 
-<router-outlet></router-outlet>

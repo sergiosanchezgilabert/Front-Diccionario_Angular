@@ -1,4 +1,4 @@
-<div class="cards">
+<div class="cards" *ngIf="logueado==true else nologin">
     <div class="card">
         <mat-card class="card-idioma">
             <mat-card-header>
@@ -37,3 +37,13 @@
         </mat-card>
     </div>
 </div>
+
+<ng-template #nologin>
+    <br>
+    <p class="image-center"><iframe src="https://giphy.com/embed/8TweEdaxxfuElKkRxz" width="480"
+         height="361" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></p>
+    <h1 class="text-center">Tienes que estar logueado</h1>
+    <div class="buttons buttons-center">
+        <button mat-raised-button color="primary" (click)="login()">LOGIN</button>
+    </div>
+</ng-template>

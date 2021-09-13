@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MaterialModule } from '../material/material.module';
 
 import { ErrorComponent } from './error.component';
 

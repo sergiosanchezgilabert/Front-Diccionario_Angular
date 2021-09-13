@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { catchError } from 'rxjs/operators';
+import { LoginService } from 'src/app/auth/service/login.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -10,23 +12,39 @@ export class ToolbarComponent implements OnInit {
 
   showFiller = false;
 
-  showIngles =false;
+  showIngles = false;
 
-  constructor(private router:Router) { }
+  constructor(private router: Router, private serviceLogin: LoginService) { }
+
+  logueado = false
 
   ngOnInit(): void {
+
+    if (localStorage.getItem('username')!==null && localStorage.getItem('password')!==null) {
+      var username = localStorage.getItem('username')
+      var password = localStorage.getItem('password')
+      console.log(username+ ' '+password)
+      this.serviceLogin.getPersona(username, password).subscribe(then => {
+        if(then!==null){
+          this.logueado = true
+          console.log(then + 'Hola')
+        }
+      
+      })
+    }
+
   }
 
-  inglesOn(){
+  inglesOn() {
     this.router.navigate(['ingles']);
   }
 
-  espanolOn(){
+  espanolOn() {
     this.router.navigate(['espanol']);
   }
 
-  inicio(){
-    this.router.navigate(['']);
+  inicio() {
+    this.router.navigate(['home']);
   }
 
 }

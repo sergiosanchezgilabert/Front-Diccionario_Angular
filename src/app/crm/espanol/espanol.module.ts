@@ -23,7 +23,6 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     MaterialModule,
     ReactiveFormsModule,
-
   ],
   exports: [RouterModule]
 })

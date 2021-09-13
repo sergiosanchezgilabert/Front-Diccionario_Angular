@@ -37,6 +37,13 @@
     justify-content: center;
 }
 
+/* ==== Tarjeta de login ==== */
+.padre {
+    display: flex;
+    justify-content: baseline;
+    flex-flow: row wrap;
+}
+
 /* ==== Tarjeta de palabra ==== */
 .word-card_header {
     justify-content: center;

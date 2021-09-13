@@ -1,31 +1,43 @@
-<div class="card">
-    <mat-card class="word-card" *ngIf="palabra !== undefined  else nopalabra">
-        <mat-card-header class="word-card_header">
-            <mat-card-title class="text text-center word-card_title">{{palabra?.palabra}}</mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="word-card_content text text-center">
-            <p>Date Added: {{palabra?.fechaAlta}}</p>
-            <p *ngIf="palabra?.fechaModificacion==''">Date Modify: {{palabra?.fechaModificacion}}</p>
+<div *ngIf="logueado==true else nologin">
+    <div class="card">
+        <mat-card class="word-card" *ngIf="palabra !== undefined  else nopalabra">
+            <mat-card-header class="word-card_header">
+                <mat-card-title class="text text-center word-card_title">{{palabra?.palabra}}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="word-card_content text text-center">
+                <p>Date Added: {{palabra?.fechaAlta}}</p>
+                <p *ngIf="palabra?.fechaModificacion==''">Date Modify: {{palabra?.fechaModificacion}}</p>
                 <p class="cursor">
-                    Translation: 
-                <button mat-icon-button class="button"
-                    (click)="espanolOn(palabra.palabraEspanol)">
-                    {{palabra?.palabraEspanol}}
-                    <img src="https://image.flaticon.com/icons/png/512/197/197593.png" width="30px" />
-                </button>
-            </p>
-        </mat-card-content>
-    </mat-card>
+                    Translation:
+                    <button mat-icon-button class="button" (click)="espanolOn(palabra.palabraEspanol)">
+                        {{palabra?.palabraEspanol}}
+                        <img src="https://image.flaticon.com/icons/png/512/197/197593.png" width="30px" />
+                    </button>
+                </p>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <mat-card-actions class="buttons buttons-center buttons-margintop">
+        <button mat-raised-button color="primary" class="button" (click)="volverOn()">
+            <mat-icon>arrow_back</mat-icon>
+            BACK
+        </button>
+    </mat-card-actions>
+
+    <ng-template class="empty" #nopalabra>
+        <br>
+        <h2 class="centrar">There aren´t any words to show</h2>
+    </ng-template>
+
 </div>
 
-<mat-card-actions class="buttons buttons-center buttons-margintop">
-    <button mat-raised-button color="primary" class="button" (click)="volverOn()">
-        <mat-icon>arrow_back</mat-icon>
-        BACK
-    </button>
-</mat-card-actions>
-
-<ng-template class="empty" #nopalabra>
+<ng-template #nologin>
     <br>
-    <h2 class="centrar">There aren´t any words to show</h2>
+    <p class="image-center"><iframe src="https://giphy.com/embed/8TweEdaxxfuElKkRxz" width="480"
+         height="361" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></p>
+    <h1 class="text-center">Tienes que estar logueado</h1>
+    <div class="buttons buttons-center">
+        <button mat-raised-button color="primary" (click)="login()">LOGIN</button>
+    </div>
 </ng-template>

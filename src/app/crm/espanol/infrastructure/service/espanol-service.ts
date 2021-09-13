@@ -23,7 +23,7 @@ export class EspanolService {
 
   aniadir(palabra: Espanol): Observable<Object> {
 
-    if(palabra.palabra===''){
+    if (palabra.palabra === '') {
       return EMPTY
     }
 
@@ -50,6 +50,8 @@ export class EspanolService {
   getPalabra(palabra: string | null): Observable<EspanolWeb> {
     const url = this.baseUrl + this.objeto + palabra
 
-    return this.http.get<EspanolWeb>(url)
+    if (palabra !== null)
+      return this.http.get<EspanolWeb>(url)
+    return EMPTY
   }
 }

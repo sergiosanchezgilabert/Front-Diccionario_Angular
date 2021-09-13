@@ -5,10 +5,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { LoginService } from 'src/app/auth/service/login.service';
 import Swal from 'sweetalert2';
 import { Ingles } from '../../../domain/I-Ingles';
 import { InglesWeb } from '../../../domain/I-InglesWeb';
-import { InglesService } from '../../service/InglesService';
+import { InglesService } from '../../service/Ingles.service';
 import { DialogInglesComponent } from '../dialog-ingles/dialog-ingles.component';
 
 @Component({
@@ -28,16 +29,34 @@ export class InglesListaComponent implements OnInit {
 
   idioma: string
 
+  logueado = false
+
   filteredOptions: Observable<string[]>
 
   constructor(private service: InglesService, public dialog: MatDialog,
-    public datepipe: DatePipe, public router: Router
+    public datepipe: DatePipe, public router: Router,private serviceLogin:LoginService
   ) {
 
   }
 
   ngOnInit() {
+    if (localStorage.getItem('username')!==null && localStorage.getItem('password')!==null) {
+      var username = localStorage.getItem('username')
+      var password = localStorage.getItem('password')
+      console.log(username+ ' '+password)
+      this.serviceLogin.getPersona(username, password).subscribe(then => {
+        if(then!==null){
+          this.logueado = true
+          console.log(then + 'Hola')
+        }
+      
+      })
+    }
     this.getDatos()
+  }
+
+  login(){
+    this.router.navigateByUrl('');
   }
 
   getDatos() {
