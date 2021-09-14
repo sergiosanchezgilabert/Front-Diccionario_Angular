@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { LoginService } from '../service/login.service';
 
 @Component({
@@ -37,7 +38,6 @@ export class LoginComponent implements OnInit {
         if(then!==null){
           this.logueado = true
         }
-      
       })
     }
   }
@@ -63,9 +63,21 @@ export class LoginComponent implements OnInit {
           this.logueado=true
           localStorage.setItem('username', resp.user);
           localStorage.setItem('password', resp.password);
+          Swal.fire({
+            position: 'top',
+            icon: 'success',
+            title: 'Registrado !',
+            showConfirmButton: false,
+            timer: 1500
+          })
           this.router.navigate(['home']);
         }
       )
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Registro erroneo!'
+      })
     }
   }
 
