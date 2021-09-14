@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { LoginService } from 'src/app/auth/service/login.service';
 
@@ -20,16 +20,16 @@ export class ToolbarComponent implements OnInit {
 
   ngOnInit(): void {
 
-    if (localStorage.getItem('username')!==null && localStorage.getItem('password')!==null) {
+    if (localStorage.getItem('username') !== null && localStorage.getItem('password') !== null) {
       var username = localStorage.getItem('username')
       var password = localStorage.getItem('password')
-      console.log(username+ ' '+password)
+      console.log(username + ' ' + password)
       this.serviceLogin.getPersona(username, password).subscribe(then => {
-        if(then!==null){
+        if (then !== null) {
           this.logueado = true
           console.log(then + 'Hola')
         }
-      
+
       })
     }
 
@@ -47,8 +47,8 @@ export class ToolbarComponent implements OnInit {
     this.router.navigate(['home']);
   }
 
-  logout(){
-    this.logueado=false
+  logout() {
+    this.logueado = false
     localStorage.removeItem('username')
     localStorage.removeItem('password')
     this.router.navigate(['']);

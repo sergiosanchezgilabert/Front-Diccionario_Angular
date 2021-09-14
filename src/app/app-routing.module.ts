@@ -5,36 +5,37 @@ import { EspanolCardComponent } from './crm/espanol/infrastructure/presentation/
 import { InglesCardComponent } from './crm/ingles/infrastructure/presentation/ingles-card/ingles-card.component';
 import { ErrorComponent } from './shared/error/error.component';
 import { HomeComponent } from './shared/home/home.component';
+import { ToolbarComponent } from './shared/toolbar/toolbar.component';
 
 const routes: Routes = [
   {
-    path:'',
-    component:LoginComponent
+    path: '',
+    component: LoginComponent
   },
   {
-    path:'home',
-    component:HomeComponent
+    path: 'home',
+    component: HomeComponent,
   },
   {
-    path:'login',
-    component:LoginComponent
+    path: 'login',
+    component: LoginComponent
   },
   {
-    path:'ingles',
+    path: 'ingles',
     loadChildren: () => import('./crm/ingles/ingles.module').then(m => m.InglesModule)
   },
   {
-    path:'espanol',
+    path: 'espanol',
     loadChildren: () => import('./crm/espanol/espanol.module').then(e => e.EspanolModule)
   },
   {
-    path:'espanol/:palabra',
-    component:EspanolCardComponent
+    path: 'espanol/:palabra',
+    component: EspanolCardComponent
   },
   {
-    path:'ingles/:palabra',
-    component:InglesCardComponent
-  }, 
+    path: 'ingles/:palabra',
+    component: InglesCardComponent
+  },
   {
     path: 'error',
     component: ErrorComponent

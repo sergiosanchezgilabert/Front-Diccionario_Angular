@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterLinkActive } from '@angular/router';
+import { NavigationEnd, Router, RouterLinkActive } from '@angular/router';
 import { LoginService } from 'src/app/auth/service/login.service';
 
 @Component({
@@ -11,32 +11,38 @@ export class HomeComponent implements OnInit {
 
   logueado = false
 
-  constructor(private router: Router,private serviceLogin: LoginService) { }
+  constructor(private router: Router, private serviceLogin: LoginService) {
+    
+  }
 
   ngOnInit(): void {
-    if (localStorage.getItem('username')!==null && localStorage.getItem('password')!==null) {
+
+    if (!localStorage.getItem('foo')) { 
+      localStorage.setItem('foo', 'no reload') 
+      location.reload() 
+    } else {
+      localStorage.removeItem('foo') 
+    }
+    if (localStorage.getItem('username') !== null && localStorage.getItem('password') !== null) {
       var username = localStorage.getItem('username')
       var password = localStorage.getItem('password')
-      console.log(username+ ' '+password)
       this.serviceLogin.getPersona(username, password).subscribe(then => {
-        if(then!==null){
+        if (then !== null) {
           this.logueado = true
-          console.log(then + 'Hola')
         }
-      
       })
     }
   }
 
-  ingles(){
+  ingles() {
     this.router.navigateByUrl('ingles');
   }
 
-  espanol(){
+  espanol() {
     this.router.navigateByUrl('espanol');
   }
 
-  login(){
+  login() {
     this.router.navigateByUrl('');
   }
 

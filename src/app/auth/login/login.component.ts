@@ -19,15 +19,27 @@ export class LoginComponent implements OnInit {
     username: ['',[Validators.required,Validators.minLength(4),Validators.maxLength(12)]],
     password: ['', [Validators.required,Validators.minLength(6)]],
     repitePassword:['', [Validators.required,Validators.minLength(6)]],
-    name: ['',[Validators.required,Validators.maxLength(10)]],
-    surname: ['', [Validators.required,Validators.maxLength(12)]]
+    name: ['',[Validators.required]],
+    surname: ['', [Validators.required]]
   })
+
+  logueado=false
 
   @Output() submitEM = new EventEmitter();
 
   constructor(private router: Router, private serviceLogin: LoginService,public fb: FormBuilder) { }
 
   ngOnInit(): void {
+    if (localStorage.getItem('username')!==null && localStorage.getItem('password')!==null) {
+      var username = localStorage.getItem('username')
+      var password = localStorage.getItem('password')
+      this.serviceLogin.getPersona(username, password).subscribe(then => {
+        if(then!==null){
+          this.logueado = true
+        }
+      
+      })
+    }
   }
 
   submit() {
@@ -35,6 +47,7 @@ export class LoginComponent implements OnInit {
       this.submitEM.emit(this.form.value);
       localStorage.setItem('username', this.form.get('username')?.value);
       localStorage.setItem('password', this.form.get('password')?.value);
+      this.logueado=true
       this.router.navigate(['home']);
     }
   }
@@ -47,12 +60,17 @@ export class LoginComponent implements OnInit {
       var surname = this.formRegistro.get('surname')?.value
       this.serviceLogin.setPersona(name, surname, username, password).subscribe(
         resp => {
+          this.logueado=true
           localStorage.setItem('username', resp.user);
           localStorage.setItem('password', resp.password);
           this.router.navigate(['home']);
         }
       )
     }
+  }
+
+  home(){
+    this.router.navigateByUrl('home');
   }
 
 }
