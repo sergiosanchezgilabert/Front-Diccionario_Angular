@@ -47,4 +47,11 @@ export class ToolbarComponent implements OnInit {
     this.router.navigate(['home']);
   }
 
+  logout(){
+    this.logueado=false
+    localStorage.removeItem('username')
+    localStorage.removeItem('password')
+    this.router.navigate(['']);
+  }
+
 }

@@ -20,4 +20,12 @@ export class LoginService {
       return this.http.get<any>(url)
     return EMPTY
   }
+
+  setPersona(name:String|null,surname:String |null, username: String | null,password:String | null): Observable<any> {
+    const url = 'http://localhost:8000/' + 'api/aniadir' + '/?name='+name +'&surname='+surname + '&user='+username+'&password='+password
+
+    if (username !== null && password !== null && name !== null && surname !== null)
+      return this.http.get<any>(url)
+    return EMPTY
+  }
 }
