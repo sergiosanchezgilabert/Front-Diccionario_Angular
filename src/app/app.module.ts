@@ -37,7 +37,7 @@ import { ToolbarComponent } from './shared/toolbar/toolbar.component';
     BrowserModule,
     BrowserAnimationsModule,
   ],
-  providers: [DatePipe,/*{ provide: ErrorHandler, useClass: GlobalErrorHandlerService },*/{provide:HTTP_INTERCEPTORS,useClass:InterceptorService,multi:true}],
+  providers: [DatePipe,{ provide: ErrorHandler, useClass: GlobalErrorHandlerService },{provide:HTTP_INTERCEPTORS,useClass:InterceptorService,multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

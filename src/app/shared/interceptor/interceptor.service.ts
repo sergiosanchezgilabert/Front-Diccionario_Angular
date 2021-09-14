@@ -33,6 +33,17 @@ export class InterceptorService implements HttpInterceptor {
                     '<i class="fa fa-thumbs-down"> Cancel</i>'
             })
         }
+        if (error.status === 403) {
+            Swal.fire({
+                title: '<strong>El nombre de usuario ya existe!</strong>',
+                icon: 'info',
+                showCloseButton: true,
+                showCancelButton: true,
+                focusConfirm: false,
+                confirmButtonText:
+                    '<i class="fa fa-thumbs-up"></i> Ok!',
+            })
+        }
 
         console.log('Ocurrio un error')
         console.warn(error)
