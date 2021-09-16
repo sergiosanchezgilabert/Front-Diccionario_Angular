@@ -28,26 +28,41 @@ export class LoginComponent implements OnInit {
 
   @Output() submitEM = new EventEmitter();
 
-  constructor(private router: Router, private serviceLogin: LoginService,public fb: FormBuilder) { }
-
-  ngOnInit(): void {
-    if (localStorage.getItem('username')!==null && localStorage.getItem('password')!==null) {
-      var username = localStorage.getItem('username')
-      var password = localStorage.getItem('password')
-      this.serviceLogin.getPersona(username, password).subscribe(then => {
-        if(then!==null){
-          this.logueado = true
-        }
-      })
+  constructor(private router: Router, private serviceLogin: LoginService,public fb: FormBuilder) { 
+    if(localStorage.getItem('logueado')!==null){
+      this.logueado=true
     }
   }
 
+  ngOnInit(): void { }
+
   submit() {
     if (this.form.valid) {
-      this.submitEM.emit(this.form.value);
-      localStorage.setItem('username', this.form.get('username')?.value);
-      localStorage.setItem('password', this.form.get('password')?.value);
-      this.logueado=true
+      localStorage.setItem('username', this.form.get('username')?.value)
+      localStorage.setItem('password', this.form.get('password')?.value)
+      localStorage.setItem('logueado', 'true')
+      var username = localStorage.getItem('username')
+      var password = localStorage.getItem('password')
+      this.serviceLogin.getPersona(username, password).subscribe(then => {
+        if (then !== null) {
+          Swal.fire({
+            position: 'top',
+            icon: 'success',
+            title: 'Bienvenido '+then.user,
+            showConfirmButton: false,
+            timer: 1500
+          })
+          this.logueado = true
+        }
+        else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Error de login!',
+
+          })
+        }
+      })
       this.router.navigate(['home']);
     }
   }
@@ -56,28 +71,38 @@ export class LoginComponent implements OnInit {
     if (this.formRegistro.valid) {
       var username = this.formRegistro.get('username')?.value
       var password = this.formRegistro.get('password')?.value
+      var repitePassword= this.formRegistro.get('repitePassword')?.value
       var name = this.formRegistro.get('name')?.value
       var surname = this.formRegistro.get('surname')?.value
-      this.serviceLogin.setPersona(name, surname, username, password).subscribe(
-        resp => {
-          this.logueado=true
-          localStorage.setItem('username', resp.user);
-          localStorage.setItem('password', resp.password);
-          Swal.fire({
-            position: 'top',
-            icon: 'success',
-            title: 'Registrado !',
-            showConfirmButton: false,
-            timer: 1500
-          })
-          this.router.navigate(['home']);
-        }
-      )
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Registro erroneo!'
-      })
+      if(password==repitePassword){
+
+        this.serviceLogin.setPersona(name, surname, username, password).subscribe(
+          resp => {
+            this.logueado=true
+            localStorage.setItem('username', resp.user);
+            localStorage.setItem('password', resp.password);
+            Swal.fire({
+              position: 'top',
+              icon: 'success',
+              title: 'Registrado !',
+              showConfirmButton: false,
+              timer: 1500
+            })
+            this.router.navigate(['home']);
+          }
+        )
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Registro erroneo!'
+        })
+      }else{
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Las contraseñas no son iguales :(!'
+        })
+      }
     }
   }
 

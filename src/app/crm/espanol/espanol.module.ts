@@ -5,11 +5,13 @@ import { DialogEspanolComponent } from './infrastructure/presentation/dialog-esp
 import { MaterialModule } from 'src/app/shared/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AplicacionResolver } from 'src/app/shared/resolver/resolver';
 
 const routes: Routes = [
   {
     path: '',
-    component: EspanolListaComponent
+    component: EspanolListaComponent,
+    resolve:{cargar:AplicacionResolver}
   }
 ];
 

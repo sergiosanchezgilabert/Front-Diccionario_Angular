@@ -14,24 +14,15 @@ export class ToolbarComponent implements OnInit {
 
   showIngles = false;
 
-  constructor(private router: Router, private serviceLogin: LoginService) { }
+  constructor(private router: Router, private serviceLogin: LoginService) {
+    if(localStorage.getItem('logueado')!==null){
+      this.logueado=true
+    }
+   }
 
   logueado = false
 
   ngOnInit(): void {
-
-    if (localStorage.getItem('username') !== null && localStorage.getItem('password') !== null) {
-      var username = localStorage.getItem('username')
-      var password = localStorage.getItem('password')
-      console.log(username + ' ' + password)
-      this.serviceLogin.getPersona(username, password).subscribe(then => {
-        if (then !== null) {
-          this.logueado = true
-          console.log(then + 'Hola')
-        }
-
-      })
-    }
 
   }
 
@@ -51,6 +42,7 @@ export class ToolbarComponent implements OnInit {
     this.logueado = false
     localStorage.removeItem('username')
     localStorage.removeItem('password')
+    localStorage.removeItem('logueado')
     this.router.navigate(['']);
   }
 

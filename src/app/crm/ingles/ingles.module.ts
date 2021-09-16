@@ -5,13 +5,14 @@ import { MaterialModule } from 'src/app/shared/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { DialogInglesComponent } from './infrastructure/presentation/dialog-ingles/dialog-ingles.component';
+import { AplicacionResolver } from 'src/app/shared/resolver/resolver';
 
 
 const routes: Routes = [
   {
       path: '',
-      component: InglesListaComponent
-    
+      component: InglesListaComponent,
+      resolve:{cargar:AplicacionResolver}
   }
 ];
 

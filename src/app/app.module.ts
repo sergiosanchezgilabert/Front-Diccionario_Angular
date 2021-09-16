@@ -17,6 +17,7 @@ import { InterceptorService } from './shared/interceptor/interceptor.service';
 import { HttpTestingController } from '@angular/common/http/testing';
 import { LoginComponent } from './auth/login/login.component';
 import { ToolbarComponent } from './shared/toolbar/toolbar.component';
+import { LoaderComponent } from './shared/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ToolbarComponent } from './shared/toolbar/toolbar.component';
     HomeComponent,
     ErrorComponent,
     LoginComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    LoaderComponent
     
   ],
   imports: [

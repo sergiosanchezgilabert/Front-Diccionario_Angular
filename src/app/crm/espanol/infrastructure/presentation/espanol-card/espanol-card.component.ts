@@ -19,27 +19,19 @@ export class EspanolCardComponent implements OnInit {
 
   palabra: EspanolWeb
 
-  arryVacio:boolean=true
+  arryVacio: boolean = true
 
-  logueado=false
+  logueado = false
 
   constructor(public dialog: MatDialog, private service: EspanolService,
     private route: ActivatedRoute, private router: Router, public datepipe: DatePipe,
-    private serviceLogin:LoginService) { }
+    private serviceLogin: LoginService) {
+    if (localStorage.getItem('logueado') !== null) {
+      this.logueado = true
+    }
+  }
 
   ngOnInit(): void {
-    if (localStorage.getItem('username')!==null && localStorage.getItem('password')!==null) {
-      var username = localStorage.getItem('username')
-      var password = localStorage.getItem('password')
-      console.log(username+ ' '+password)
-      this.serviceLogin.getPersona(username, password).subscribe(then => {
-        if(then!==null){
-          this.logueado = true
-          console.log(then + 'Hola')
-        }
-      
-      })
-    }
     this.route.paramMap.subscribe((param) => {
       this.service.getPalabra(param.get("palabra"))
         .subscribe((resp) => {
@@ -48,28 +40,30 @@ export class EspanolCardComponent implements OnInit {
           this.palabra.fechaAlta = this.datepipe.transform(this.palabra.fechaAlta, 'dd/MM/yyyy')
           this.palabra.fechaModificacion = this.datepipe.transform(this.palabra.fechaModificacion, 'dd/MM/yyyy')
 
-          if(this.palabra.palabrasIngles.length!=0) this.arryVacio=false
+          if (this.palabra.palabrasIngles.length != 0) this.arryVacio = false
         },
-        error=>{if (error.status === 404){
-          Swal.fire({
-            title: '<strong>Not find!</strong>',
-            icon: 'info',
-            showCloseButton: true,
-            showCancelButton: true,
-            focusConfirm: false,
-            confirmButtonText:
-                '<i class="fa fa-thumbs-up"></i> Fantastic!',
-            confirmButtonAriaLabel: 'Thumbs up, great!',
-            cancelButtonText:
-                '<i class="fa fa-thumbs-down"> Cancel</i>'
-        })
-        this.router.navigate(['espanol'])
-        }});
+          error => {
+            if (error.status === 404) {
+              Swal.fire({
+                title: '<strong>Not find!</strong>',
+                icon: 'info',
+                showCloseButton: true,
+                showCancelButton: true,
+                focusConfirm: false,
+                confirmButtonText:
+                  '<i class="fa fa-thumbs-up"></i> Fantastic!',
+                confirmButtonAriaLabel: 'Thumbs up, great!',
+                cancelButtonText:
+                  '<i class="fa fa-thumbs-down"> Cancel</i>'
+              })
+              this.router.navigate(['espanol'])
+            }
+          });
     },
-     );
+    );
   }
 
-  login(){
+  login() {
     this.router.navigateByUrl('');
   }
 

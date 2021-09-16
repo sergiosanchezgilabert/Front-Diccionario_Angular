@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { EMPTY, Observable } from 'rxjs';
+import { delay } from 'rxjs/operators';
 import { environment } from 'src/environments/environment.prod';
 import { Espanol } from '../../domain/IEspanol';
 import { EspanolWeb } from '../../domain/IEspanolWeb';
@@ -37,14 +38,14 @@ export class EspanolService {
 
     const url = this.baseUrl + this.objeto + espanol.palabra
 
-    return this.http.put(url, espanol);
+    return this.http.put(url, espanol)
   }
 
   borrar(palabra: string): Observable<Object> {
 
     const url = this.baseUrl + this.objeto + palabra;
 
-    return this.http.delete(url);
+    return this.http.delete(url)
   }
 
   getPalabra(palabra: string | null): Observable<EspanolWeb> {

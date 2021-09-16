@@ -34,21 +34,13 @@ export class EspanolListaComponent implements OnInit {
   filteredOptions: Observable<string[]>
 
   constructor(private service: EspanolService, public dialog: MatDialog,
-    public datepipe: DatePipe, public router: Router,private serviceLogin: LoginService) { }
+    public datepipe: DatePipe, public router: Router, private serviceLogin: LoginService) {
+    if (localStorage.getItem('logueado') !== null) {
+      this.logueado = true
+    }
+  }
 
   ngOnInit() {
-    if (localStorage.getItem('username')!==null && localStorage.getItem('password')!==null) {
-      var username = localStorage.getItem('username')
-      var password = localStorage.getItem('password')
-      console.log(username+ ' '+password)
-      this.serviceLogin.getPersona(username, password).subscribe(then => {
-        if(then!==null){
-          this.logueado = true
-          console.log(then + 'Hola')
-        }
-      
-      })
-    }
     this.getDatos()
 
   }
@@ -60,7 +52,7 @@ export class EspanolListaComponent implements OnInit {
     );
   }
 
-  login(){
+  login() {
     this.router.navigateByUrl('');
   }
 

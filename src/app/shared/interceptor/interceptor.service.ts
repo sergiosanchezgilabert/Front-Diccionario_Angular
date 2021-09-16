@@ -3,10 +3,11 @@ import { Observable, throwError } from "rxjs";
 import { Injectable } from '@angular/core'
 import { catchError } from "rxjs/operators";
 import Swal from "sweetalert2";
+import { Router } from "@angular/router";
 
 @Injectable({ providedIn: 'root' })
 export class InterceptorService implements HttpInterceptor {
-    constructor() { }
+    constructor(private router: Router) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(req).pipe(
@@ -16,7 +17,7 @@ export class InterceptorService implements HttpInterceptor {
 
     manejarError(error: HttpErrorResponse) {
 
-        if (error.status === 406 && error.url==='http://localhost:8080/ingles/') {
+        if (error.status === 406 && error.url === 'http://localhost:8080/ingles/') {
             Swal.fire({
                 title: '<strong>Is neccesary to insert the Spanish word!</strong>',
                 icon: 'info',
@@ -44,10 +45,21 @@ export class InterceptorService implements HttpInterceptor {
                     '<i class="fa fa-thumbs-up"></i> Ok!',
             })
         }
+        if (error.status === 0) {
+            Swal.fire({
+                title: '<strong>El BACK esta caido :(!</strong>',
+                icon: 'info',
+                showCloseButton: true,
+                showCancelButton: true,
+                focusConfirm: false,
+                confirmButtonText:
+                    '<i class="fa fa-thumbs-up"></i> Ok!',
+            })
+        }
 
         console.log('Ocurrio un error')
         console.warn(error)
-       // return throwError(error) ESTO MANDA AL SUBSCRIBE QUE COGE EL ERROR Y ALLI LO GESTIONAS PARA EVITAR QUE HAGA COSAS  RARAS
+        // return throwError(error) ESTO MANDA AL SUBSCRIBE QUE COGE EL ERROR Y ALLI LO GESTIONAS PARA EVITAR QUE HAGA COSAS  RARAS
         return throwError(error)
     }
 }

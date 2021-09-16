@@ -3,5 +3,5 @@ export const environment = {
   baseUrl: "http://localhost:8080/",
   espanol:"espanol/",
   ingles:"ingles/",
-  baseUrlBack:"http://localhost:8000/"
+  baseUrlBack:"https://api-back-personas.herokuapp.com/"
 };

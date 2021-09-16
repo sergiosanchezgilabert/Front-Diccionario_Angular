@@ -20,28 +20,20 @@ export class InglesCardComponent implements OnInit {
   logueado = false
 
   constructor(public dialog: MatDialog, private service: InglesService,
-    private route: ActivatedRoute, private router: Router, 
-    public datepipe: DatePipe,private serviceLogin: LoginService) { }
+    private route: ActivatedRoute, private router: Router,
+    public datepipe: DatePipe, private serviceLogin: LoginService) {
+    if (localStorage.getItem('logueado') !== null) {
+      this.logueado = true
+    }
+  }
 
   ngOnInit(): void {
-    if (localStorage.getItem('username')!==null && localStorage.getItem('password')!==null) {
-      var username = localStorage.getItem('username')
-      var password = localStorage.getItem('password')
-      console.log(username+ ' '+password)
-      this.serviceLogin.getPersona(username, password).subscribe(then => {
-        if(then!==null){
-          this.logueado = true
-          console.log(then + 'Hola')
-        }
-      
-      })
-    }
     this.route.paramMap.subscribe((param) => {
       this.service.getPalabra(param.get("palabra"))
         .subscribe((resp) => {
           this.palabra = resp
-          
-          this.palabra.fechaAlta=this.datepipe.transform(this.palabra.fechaAlta, 'dd/MM/yyyy')
+
+          this.palabra.fechaAlta = this.datepipe.transform(this.palabra.fechaAlta, 'dd/MM/yyyy')
           this.palabra.fechaModificacion = this.datepipe.transform(this.palabra.fechaModificacion, 'dd/MM/yyyy')
         });
     });
@@ -61,7 +53,7 @@ export class InglesCardComponent implements OnInit {
     });
   }
 
-  login(){
+  login() {
     this.router.navigateByUrl('');
   }
 

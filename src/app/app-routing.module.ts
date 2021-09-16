@@ -5,6 +5,7 @@ import { EspanolCardComponent } from './crm/espanol/infrastructure/presentation/
 import { InglesCardComponent } from './crm/ingles/infrastructure/presentation/ingles-card/ingles-card.component';
 import { ErrorComponent } from './shared/error/error.component';
 import { HomeComponent } from './shared/home/home.component';
+import { AplicacionResolver } from './shared/resolver/resolver';
 import { ToolbarComponent } from './shared/toolbar/toolbar.component';
 
 const routes: Routes = [
@@ -22,7 +23,7 @@ const routes: Routes = [
   },
   {
     path: 'ingles',
-    loadChildren: () => import('./crm/ingles/ingles.module').then(m => m.InglesModule)
+    loadChildren: () => import('./crm/ingles/ingles.module').then(m => m.InglesModule),
   },
   {
     path: 'espanol',
@@ -30,11 +31,13 @@ const routes: Routes = [
   },
   {
     path: 'espanol/:palabra',
-    component: EspanolCardComponent
+    component: EspanolCardComponent,
+    resolve:{cargar:AplicacionResolver}
   },
   {
     path: 'ingles/:palabra',
-    component: InglesCardComponent
+    component: InglesCardComponent,
+    resolve:{cargar:AplicacionResolver}
   },
   {
     path: 'error',

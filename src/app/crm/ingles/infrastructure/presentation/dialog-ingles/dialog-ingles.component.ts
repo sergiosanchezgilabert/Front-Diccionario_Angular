@@ -27,26 +27,18 @@ export class DialogInglesComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<DialogInglesComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, public fb: FormBuilder,
     private inglesService: InglesService, private espanolService: EspanolService,
-    private serviceLogin: LoginService,private router:Router) { }
+    private serviceLogin: LoginService, private router: Router) {
+    if (localStorage.getItem('logueado') !== null) {
+      this.logueado = true
+    }
+  }
 
   formIngles: FormGroup = this.fb.group({
-    palabra: ['', [Validators.required,, Validators.pattern('[a-zA-Z ]*')]],
+    palabra: ['', [Validators.required, , Validators.pattern('[a-zA-Z ]*')]],
     palabraEspanol: ['', Validators.required]
   })
 
   ngOnInit(): void {
-    if (localStorage.getItem('username')!==null && localStorage.getItem('password')!==null) {
-      var username = localStorage.getItem('username')
-      var password = localStorage.getItem('password')
-      console.log(username+ ' '+password)
-      this.serviceLogin.getPersona(username, password).subscribe(then => {
-        if(then!==null){
-          this.logueado = true
-          console.log(then + 'Hola')
-        }
-      
-      })
-    }
     if (this.data !== null) {
       this.palabraIngles = this.data.palabras
       this.formIngles.patchValue(this.data.palabras)
@@ -54,7 +46,7 @@ export class DialogInglesComponent implements OnInit {
     }
   }
 
-  login(){
+  login() {
     this.router.navigateByUrl('');
   }
 

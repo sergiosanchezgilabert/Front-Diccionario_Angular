@@ -21,28 +21,20 @@ export class DialogEspanolComponent implements OnInit {
   logueado = false
 
   formEspanol: FormGroup = this.fb.group({
-    palabra: ['',[Validators.required, Validators.pattern('[a-zA-Z]*')]], //Validators.pattern('[a-zA-Z]* ') Para permitir espacios
+    palabra: ['', [Validators.required, Validators.pattern('[a-zA-Z]*')]], //Validators.pattern('[a-zA-Z]* ') Para permitir espacios
     descripcion: ['', Validators.required]
   })
 
   constructor(public dialogRef: MatDialogRef<DialogEspanolComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any, public fb: FormBuilder, 
-    private espanolService: EspanolService,private serviceLogin: LoginService,
-    private router:Router) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, public fb: FormBuilder,
+    private espanolService: EspanolService, private serviceLogin: LoginService,
+    private router: Router) {
+    if (localStorage.getItem('logueado') !== null) {
+      this.logueado = true
+    }
+  }
 
   ngOnInit(): void {
-    if (localStorage.getItem('username')!==null && localStorage.getItem('password')!==null) {
-      var username = localStorage.getItem('username')
-      var password = localStorage.getItem('password')
-      console.log(username+ ' '+password)
-      this.serviceLogin.getPersona(username, password).subscribe(then => {
-        if(then!==null){
-          this.logueado = true
-          console.log(then + 'Hola')
-        }
-      
-      })
-    }
 
     if (this.data !== null) {
       this.palabra = this.data.palabras
@@ -55,7 +47,7 @@ export class DialogEspanolComponent implements OnInit {
     this.dialogRef.close()
   }
 
-  login(){
+  login() {
     this.router.navigateByUrl('');
   }
 
