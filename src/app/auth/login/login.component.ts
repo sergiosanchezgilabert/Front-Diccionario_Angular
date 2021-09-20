@@ -6,6 +6,8 @@ import { LoginService } from '../service/login.service';
 import { SocialAuthService } from "angularx-social-login";
 import { SocialUser } from "angularx-social-login";
 import { GoogleLoginProvider } from "angularx-social-login";
+import { delay } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -36,12 +38,9 @@ export class LoginComponent implements OnInit {
     public fb: FormBuilder, private authService: SocialAuthService
   ) {
 
-    if (localStorage.getItem('logueado') !== null) {
+    if (localStorage.getItem('ACCESS_TOKEN') !== null) {
       this.logueado = true
-    }
-    if (localStorage.getItem('usernameGoogle') !== null) {
-      this.logueado = true
-    }
+    }else this.logueado=false
   }
 
   ngOnInit(): void {
@@ -52,16 +51,26 @@ export class LoginComponent implements OnInit {
     this.authService.authState.subscribe(user => {
       this.user = user;
       this.serviceLogin.getPersonaGoogle(user)
-          Swal.fire({
-            position: 'top',
-            icon: 'success',
-            title: 'Bienvenido ' + user.name,
-            showConfirmButton: false,
-            timer: 1500
-          })
-          this.logueado = true
-          this.router.navigate(['home']);
-       
+
+      this.logueado = true
+      /*const myObservable = of(1, 2, 3);
+
+      myObservable.pipe(
+        delay(3000)
+      )*/
+
+      localStorage.setItem('nombre', user.name)
+      localStorage.setItem('usuario', user.email)
+
+      Swal.fire({
+        position: 'top',
+        icon: 'success',
+        title: 'Bienvenido ' + user.name,
+        showConfirmButton: false,
+        timer: 4000
+      }).then(resp =>
+        this.router.navigate(['home'])
+      )
     });
   }
 
@@ -79,6 +88,10 @@ export class LoginComponent implements OnInit {
             timer: 1500
           })
           this.logueado = true
+
+          localStorage.setItem('nombre', then.user)
+          localStorage.setItem('usuario', username)
+
           this.router.navigate(['home']);
         }
         else {
@@ -114,6 +127,10 @@ export class LoginComponent implements OnInit {
                 showConfirmButton: false,
                 timer: 1500
               })
+
+              localStorage.setItem('nombre', resp.name)
+              localStorage.setItem('usuario', username)
+
               this.router.navigate(['home']);
             } else {
               Swal.fire({

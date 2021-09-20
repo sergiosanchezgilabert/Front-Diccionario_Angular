@@ -18,15 +18,13 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     if (!localStorage.getItem('reload')) {
       localStorage.setItem('reload', 'no reload')
+      await new Promise(f => setTimeout(f, 1000));
       location.reload()
     } else {
       localStorage.removeItem('reload')
-    }
-    if (localStorage.getItem('usernameGoogle') !== null) {
-      this.logueado = true
     }
   }
 

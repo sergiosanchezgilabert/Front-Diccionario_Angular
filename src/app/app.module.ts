@@ -21,6 +21,7 @@ import { LoaderComponent } from './shared/loader/loader.component';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { SocialLoginModule,SocialAuthServiceConfig } from "angularx-social-login";
 import { GoogleLoginProvider } from "angularx-social-login";
+import { PerfilComponent } from './shared/perfil/perfil.component';
 
 const CLIENT_ID = "911774596470-f541q8k01falsqa5778jkjusc35khj7b.apps.googleusercontent.com"
 
@@ -28,13 +29,14 @@ const CLIENT_ID = "911774596470-f541q8k01falsqa5778jkjusc35khj7b.apps.googleuser
 @NgModule({
   declarations: [
     AppComponent,
-    EspanolCardComponent,
-    InglesCardComponent,
     HomeComponent,
     ErrorComponent,
     LoginComponent,
     ToolbarComponent,
     LoaderComponent,
+    EspanolCardComponent,
+    InglesCardComponent,
+    PerfilComponent
 
   ],
   imports: [
@@ -61,7 +63,7 @@ const CLIENT_ID = "911774596470-f541q8k01falsqa5778jkjusc35khj7b.apps.googleuser
         }
       ]
     } as SocialAuthServiceConfig
-  }, DatePipe,/*{ provide: ErrorHandler, useClass: GlobalErrorHandlerService }*/{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }],
+  }, DatePipe,{ provide: ErrorHandler, useClass: GlobalErrorHandlerService },{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

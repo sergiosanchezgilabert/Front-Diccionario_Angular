@@ -27,21 +27,23 @@ export class ToolbarComponent implements OnInit {
   }
 
   inglesOn() {
-    this.router.navigate(['ingles']);
+    this.router.navigate(['ingles'])
   }
 
   espanolOn() {
-    this.router.navigate(['espanol']);
+    this.router.navigate(['espanol'])
   }
 
   inicio() {
-    this.router.navigate(['home']);
+    this.router.navigate(['home'])
   }
 
   logout() {
     this.logueado = false
     this.serviceLogin.logout()
-    this.router.navigate(['']);
+    localStorage.removeItem('nombre')
+    localStorage.removeItem('usuario')
+    this.router.navigate(['perfil'])
   }
 
 }

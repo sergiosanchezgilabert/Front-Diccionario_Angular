@@ -1,0 +1,19 @@
+<div *ngIf="logueado==true">
+  <mat-toolbar>
+    <mat-toolbar-row>
+      <p (click)="drawer.toggle()">Perfil</p>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <mat-sidenav-container class="example-container">
+    <mat-sidenav #drawer mode="side" opened role="navigation">
+      <img width="300px" src="https://cdn-icons-png.flaticon.com/512/1361/1361728.png" alt="">
+      <mat-nav-list>
+        <p mat-list-item>Nombre: {{nombre}}</p>
+        <a mat-list-item>Usuario: {{usuario}}</a> 
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

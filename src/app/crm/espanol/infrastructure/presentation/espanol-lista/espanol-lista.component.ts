@@ -144,8 +144,6 @@ export class EspanolListaComponent implements OnInit {
     let palabra: String
     palabra = element.palabra
 
-    console.log(palabra)
-
     this.router.navigate(['espanol/', palabra]);
   }
 

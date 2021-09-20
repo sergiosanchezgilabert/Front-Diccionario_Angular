@@ -5,6 +5,7 @@ import { EspanolCardComponent } from './crm/espanol/infrastructure/presentation/
 import { InglesCardComponent } from './crm/ingles/infrastructure/presentation/ingles-card/ingles-card.component';
 import { ErrorComponent } from './shared/error/error.component';
 import { HomeComponent } from './shared/home/home.component';
+import { PerfilComponent } from './shared/perfil/perfil.component';
 import { AplicacionResolver } from './shared/resolver/resolver';
 import { ToolbarComponent } from './shared/toolbar/toolbar.component';
 
@@ -42,7 +43,12 @@ const routes: Routes = [
   {
     path: 'error',
     component: ErrorComponent
+  },
+  {
+    path: 'perfil',
+    component: PerfilComponent
   }
+
 ];
 
 @NgModule({
