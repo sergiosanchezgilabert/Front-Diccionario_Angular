@@ -15,10 +15,10 @@ export class ToolbarComponent implements OnInit {
   showIngles = false;
 
   constructor(private router: Router, private serviceLogin: LoginService) {
-    if(localStorage.getItem('logueado')!==null){
-      this.logueado=true
+    if (localStorage.getItem('ACCESS_TOKEN') !== null) {
+      this.logueado = true
     }
-   }
+  }
 
   logueado = false
 
@@ -40,9 +40,7 @@ export class ToolbarComponent implements OnInit {
 
   logout() {
     this.logueado = false
-    localStorage.removeItem('username')
-    localStorage.removeItem('password')
-    localStorage.removeItem('logueado')
+    this.serviceLogin.logout()
     this.router.navigate(['']);
   }
 

@@ -34,10 +34,9 @@ export class InglesListaComponent implements OnInit {
   filteredOptions: Observable<string[]>
 
   constructor(private service: InglesService, public dialog: MatDialog,
-    public datepipe: DatePipe, public router: Router,private serviceLogin:LoginService
-  ) {
-    if(localStorage.getItem('logueado')!==null){
-      this.logueado=true
+    public datepipe: DatePipe, public router: Router, private serviceLogin: LoginService) {
+    if (localStorage.getItem('ACCESS_TOKEN') !== null) {
+      this.logueado = true
     }
   }
 
@@ -45,7 +44,7 @@ export class InglesListaComponent implements OnInit {
     this.getDatos()
   }
 
-  login(){
+  login() {
     this.router.navigateByUrl('');
   }
 
@@ -144,6 +143,6 @@ export class InglesListaComponent implements OnInit {
   buscarOn(palabra: string) {
     if (palabra !== '')
       this.service.getPalabra(palabra)
-      this.router.navigate(['ingles', palabra])
+    this.router.navigate(['ingles', palabra])
   }
 }

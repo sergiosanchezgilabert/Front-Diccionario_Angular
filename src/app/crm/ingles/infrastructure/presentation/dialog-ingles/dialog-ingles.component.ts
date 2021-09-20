@@ -28,9 +28,9 @@ export class DialogInglesComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any, public fb: FormBuilder,
     private inglesService: InglesService, private espanolService: EspanolService,
     private serviceLogin: LoginService, private router: Router) {
-    if (localStorage.getItem('logueado') !== null) {
-      this.logueado = true
-    }
+      if (localStorage.getItem('ACCESS_TOKEN') !== null) {
+        this.logueado = true
+      }
   }
 
   formIngles: FormGroup = this.fb.group({

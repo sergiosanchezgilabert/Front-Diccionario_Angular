@@ -23,9 +23,9 @@ export class LoaderComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.router.events.subscribe(event => {
 
-      if (event instanceof NavigationStart && localStorage.getItem('logueado') !== null) {
+      if (event instanceof NavigationStart && localStorage.getItem('ACCESS_TOKEN') !== null) {
         this.show = true
-      }else if(event instanceof NavigationEnd && localStorage.getItem('logueado') !== null) {
+      }else if(event instanceof NavigationEnd && localStorage.getItem('ACCESS_TOKEN') !== null) {
         this.show = false
       }
     })

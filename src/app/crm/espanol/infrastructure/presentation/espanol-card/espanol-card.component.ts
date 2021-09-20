@@ -26,9 +26,9 @@ export class EspanolCardComponent implements OnInit {
   constructor(public dialog: MatDialog, private service: EspanolService,
     private route: ActivatedRoute, private router: Router, public datepipe: DatePipe,
     private serviceLogin: LoginService) {
-    if (localStorage.getItem('logueado') !== null) {
-      this.logueado = true
-    }
+      if (localStorage.getItem('ACCESS_TOKEN') !== null) {
+        this.logueado = true
+      }
   }
 
   ngOnInit(): void {

@@ -19,6 +19,9 @@
 
     "strictPropertyInitialization": false,
 
+    "emitDecoratorMetadata": true,
+
+
 
     "lib": [
       "es2018",

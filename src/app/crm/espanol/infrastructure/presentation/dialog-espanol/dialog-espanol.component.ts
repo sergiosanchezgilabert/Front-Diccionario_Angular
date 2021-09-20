@@ -29,9 +29,9 @@ export class DialogEspanolComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any, public fb: FormBuilder,
     private espanolService: EspanolService, private serviceLogin: LoginService,
     private router: Router) {
-    if (localStorage.getItem('logueado') !== null) {
-      this.logueado = true
-    }
+      if (localStorage.getItem('ACCESS_TOKEN') !== null) {
+        this.logueado = true
+      }
   }
 
   ngOnInit(): void {

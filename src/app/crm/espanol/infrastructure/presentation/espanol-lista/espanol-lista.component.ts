@@ -35,9 +35,9 @@ export class EspanolListaComponent implements OnInit {
 
   constructor(private service: EspanolService, public dialog: MatDialog,
     public datepipe: DatePipe, public router: Router, private serviceLogin: LoginService) {
-    if (localStorage.getItem('logueado') !== null) {
-      this.logueado = true
-    }
+      if (localStorage.getItem('ACCESS_TOKEN') !== null) {
+        this.logueado = true
+      }
   }
 
   ngOnInit() {

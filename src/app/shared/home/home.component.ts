@@ -13,17 +13,20 @@ export class HomeComponent implements OnInit {
   logueado = false
 
   constructor(private router: Router, private serviceLogin: LoginService) {
-    if(localStorage.getItem('logueado')!==null){
-      this.logueado=true
+    if (localStorage.getItem('ACCESS_TOKEN') !== null) {
+      this.logueado = true
     }
   }
 
   ngOnInit(): void {
-    if (!localStorage.getItem('foo')) {
-      localStorage.setItem('foo', 'no reload')
+    if (!localStorage.getItem('reload')) {
+      localStorage.setItem('reload', 'no reload')
       location.reload()
     } else {
-      localStorage.removeItem('foo')
+      localStorage.removeItem('reload')
+    }
+    if (localStorage.getItem('usernameGoogle') !== null) {
+      this.logueado = true
     }
   }
 

@@ -116,6 +116,11 @@
     margin-bottom: 20px;
 }
 
+.buttons-spacing{
+    display: flex;
+    justify-content: space-around;
+}
+
 /* ==== Botones escalado ==== */
 .button-scaled {
     transform: $scalado-button;

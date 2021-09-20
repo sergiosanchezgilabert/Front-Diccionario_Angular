@@ -1,4 +1,4 @@
-import { ErrorHandler, NgModule } from '@angular/core';
+import { ErrorHandler, Injectable, NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +18,12 @@ import { HttpTestingController } from '@angular/common/http/testing';
 import { LoginComponent } from './auth/login/login.component';
 import { ToolbarComponent } from './shared/toolbar/toolbar.component';
 import { LoaderComponent } from './shared/loader/loader.component';
+import { OAuthModule } from 'angular-oauth2-oidc';
+import { SocialLoginModule,SocialAuthServiceConfig } from "angularx-social-login";
+import { GoogleLoginProvider } from "angularx-social-login";
+
+const CLIENT_ID = "911774596470-f541q8k01falsqa5778jkjusc35khj7b.apps.googleusercontent.com"
+
 
 @NgModule({
   declarations: [
@@ -28,8 +34,8 @@ import { LoaderComponent } from './shared/loader/loader.component';
     ErrorComponent,
     LoginComponent,
     ToolbarComponent,
-    LoaderComponent
-    
+    LoaderComponent,
+
   ],
   imports: [
     AppRoutingModule,
@@ -38,8 +44,24 @@ import { LoaderComponent } from './shared/loader/loader.component';
     HttpClientModule,
     BrowserModule,
     BrowserAnimationsModule,
+    OAuthModule.forRoot(),
+    SocialLoginModule
+
   ],
-  providers: [DatePipe,{ provide: ErrorHandler, useClass: GlobalErrorHandlerService },{provide:HTTP_INTERCEPTORS,useClass:InterceptorService,multi:true}],
+  providers: [ {
+    provide: "SocialAuthServiceConfig",
+    useValue: {
+      autoLogin: true,
+      providers: [
+        {
+          id: GoogleLoginProvider.PROVIDER_ID,
+          provider: new GoogleLoginProvider(
+            CLIENT_ID
+          )
+        }
+      ]
+    } as SocialAuthServiceConfig
+  }, DatePipe,/*{ provide: ErrorHandler, useClass: GlobalErrorHandlerService }*/{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
