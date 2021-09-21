@@ -1,16 +1,22 @@
 <div *ngIf="logueado==true">
-  <mat-toolbar>
+  <mat-toolbar class="perfil-toolbar perfil-toolbar_background">
     <mat-toolbar-row>
-      <p (click)="drawer.toggle()">Perfil</p>
+      <button   mat-mini-fab disabled aria-label="Example icon button with a home icon">
+        <mat-icon (click)="drawer.toggle()">account_circle</mat-icon>
+      </button>
     </mat-toolbar-row>
   </mat-toolbar>
-  <mat-sidenav-container class="example-container">
-    <mat-sidenav #drawer mode="side" opened role="navigation">
-      <img width="300px" src="https://cdn-icons-png.flaticon.com/512/1361/1361728.png" alt="">
+  <mat-sidenav-container class="perfil-container-hola">
+    <mat-sidenav #drawer class=" perfil-container_backgroud" mode="side" opened role="navigation">
+      <div class="img-perfil-container"><img class="img-perfil" src={{foto}} alt="Foto Perfil"></div>
+      <br>
       <mat-nav-list>
-        <p mat-list-item>Nombre: {{nombre}}</p>
-        <a mat-list-item>Usuario: {{usuario}}</a> 
+        <div mat-list-item class="text-perfil"><b>Nombre: </b> <p>{{nombre}}</p></div>
+        <div mat-list-item class="text-perfil"><b>Usuario:</b><p>{{usuario}}</p></div> 
       </mat-nav-list>
+      <div class="buttons-center">
+        <button mat-raised-button color="accent" (click)="logout()">Logout <mat-icon>exit_to_app</mat-icon></button>
+    </div>
     </mat-sidenav>
     <mat-sidenav-content>
       <router-outlet></router-outlet>

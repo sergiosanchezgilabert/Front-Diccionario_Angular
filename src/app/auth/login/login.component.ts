@@ -37,10 +37,17 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router, private serviceLogin: LoginService,
     public fb: FormBuilder, private authService: SocialAuthService
   ) {
-
     if (localStorage.getItem('ACCESS_TOKEN') !== null) {
       this.logueado = true
-    }else this.logueado=false
+    }else {
+      this.logueado=false
+      if (!localStorage.getItem('reload')) {
+        localStorage.setItem('reload', 'no reload')
+        location.reload()
+      } else {
+        localStorage.removeItem('reload')
+      }
+    }
   }
 
   ngOnInit(): void {
@@ -61,6 +68,7 @@ export class LoginComponent implements OnInit {
 
       localStorage.setItem('nombre', user.name)
       localStorage.setItem('usuario', user.email)
+      localStorage.setItem('foto_perfil', user.photoUrl)
 
       Swal.fire({
         position: 'top',

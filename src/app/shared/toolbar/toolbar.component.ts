@@ -38,12 +38,4 @@ export class ToolbarComponent implements OnInit {
     this.router.navigate(['home'])
   }
 
-  logout() {
-    this.logueado = false
-    this.serviceLogin.logout()
-    localStorage.removeItem('nombre')
-    localStorage.removeItem('usuario')
-    this.router.navigate(['perfil'])
-  }
-
 }

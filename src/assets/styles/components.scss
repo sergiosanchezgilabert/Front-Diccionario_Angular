@@ -116,7 +116,7 @@
     margin-bottom: 20px;
 }
 
-.buttons-spacing{
+.buttons-spacing {
     display: flex;
     justify-content: space-around;
 }
@@ -219,4 +219,30 @@
 
 .padding-top {
     padding-top: 180px;
+}
+
+/* ==== Tamaño de imagen de perfil ====*/
+.img-perfil {
+    width: 200px;
+    border-radius: 1000px;
+
+}
+
+/* ==== Texto de perfil ====*/
+.text-perfil {
+    font-size: 20px;
+}
+
+/* ==== Color fondo toolbar perfil ====*/
+.perfil-toolbar_background{
+    background-color: lightgray
+}
+
+/* ==== Color fondo sidenav perfil ====*/
+.perfil-container_backgroud{
+    background-color: lightgray
+}
+
+.img-perfil-container{
+    margin: 40px;
 }

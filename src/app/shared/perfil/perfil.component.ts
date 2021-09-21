@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoginService } from 'src/app/auth/service/login.service';
 
 @Component({
   selector: 'app-perfil',
@@ -12,9 +13,11 @@ export class PerfilComponent implements OnInit {
 
   usuario: string | null = ''
 
+  foto: string | null=''
+
   logueado = false
 
-  constructor(private router: Router) {
+  constructor(private router: Router,private serviceLogin:LoginService) {
     if (localStorage.getItem('ACCESS_TOKEN') !== null) {
       this.logueado = true
     }
@@ -25,6 +28,7 @@ export class PerfilComponent implements OnInit {
     if (localStorage.getItem('nombre') !== undefined && localStorage.getItem('usuario') !== undefined) {
       this.nombre = localStorage.getItem('nombre')
       this.usuario = localStorage.getItem('usuario')
+      this.foto=localStorage.getItem('foto_perfil')
     }
   }
 
@@ -32,18 +36,18 @@ export class PerfilComponent implements OnInit {
     if (localStorage.getItem('ACCESS_TOKEN') !== null) {
       this.logueado = true
     }
-    else {
+    /*else {
       this.logueado = false
-      if (!localStorage.getItem('reload')) {
-        localStorage.setItem('reload', 'no reload')
-        location.reload()
-      } else {
-
-        localStorage.removeItem('reload')
-        this.router.navigate([''])
-      }
       
-    }
+    }*/
+  }
 
+  logout() {
+    this.logueado = false
+    this.serviceLogin.logout()
+    localStorage.removeItem('nombre')
+    localStorage.removeItem('usuario')
+    localStorage.removeItem('foto_perfil')
+    this.router.navigate([''])
   }
 }
