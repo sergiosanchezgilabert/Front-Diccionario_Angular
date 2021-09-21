@@ -33,13 +33,6 @@ export class PerfilComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (localStorage.getItem('ACCESS_TOKEN') !== null) {
-      this.logueado = true
-    }
-    /*else {
-      this.logueado = false
-      
-    }*/
   }
 
   logout() {

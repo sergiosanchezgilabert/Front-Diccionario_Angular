@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
 
   logueado = false
 
-  constructor(private router: Router, private serviceLogin: LoginService) {
+  constructor(private router: Router) {
     if (localStorage.getItem('ACCESS_TOKEN') !== null) {
       this.logueado = true
     }

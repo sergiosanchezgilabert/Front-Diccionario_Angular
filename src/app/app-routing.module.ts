@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './auth/login/login.component';
+import { AuthGuard } from './auth/service/AuthGuard';
 import { EspanolCardComponent } from './crm/espanol/infrastructure/presentation/espanol-card/espanol-card.component';
 import { InglesCardComponent } from './crm/ingles/infrastructure/presentation/ingles-card/ingles-card.component';
 import { ErrorComponent } from './shared/error/error.component';
@@ -17,28 +18,37 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate:[AuthGuard]
+
   },
   {
     path: 'ingles',
     loadChildren: () => import('./crm/ingles/ingles.module').then(m => m.InglesModule),
+    canActivate:[AuthGuard]
   },
   {
     path: 'espanol',
-    loadChildren: () => import('./crm/espanol/espanol.module').then(e => e.EspanolModule)
+    loadChildren: () => import('./crm/espanol/espanol.module').then(e => e.EspanolModule),
+    canActivate:[AuthGuard]
   },
   {
     path: 'espanol/:palabra',
     component: EspanolCardComponent,
-    resolve:{cargar:AplicacionResolver}
+    resolve:{cargar:AplicacionResolver},
+    canActivate:[AuthGuard]
+
   },
   {
     path: 'ingles/:palabra',
     component: InglesCardComponent,
-    resolve:{cargar:AplicacionResolver}
+    resolve:{cargar:AplicacionResolver},
+    canActivate:[AuthGuard]
+
   },
   {
     path: 'error',
@@ -46,13 +56,15 @@ const routes: Routes = [
   },
   {
     path: 'perfil',
-    component: PerfilComponent
+    component: PerfilComponent,
+    canActivate:[AuthGuard]
   }
 
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers:[]
 })
 export class AppRoutingModule { }

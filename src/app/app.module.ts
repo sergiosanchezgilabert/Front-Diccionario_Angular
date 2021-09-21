@@ -22,6 +22,7 @@ import { OAuthModule } from 'angular-oauth2-oidc';
 import { SocialLoginModule,SocialAuthServiceConfig } from "angularx-social-login";
 import { GoogleLoginProvider } from "angularx-social-login";
 import { PerfilComponent } from './shared/perfil/perfil.component';
+import { LoginService } from './auth/service/login.service';
 
 const CLIENT_ID = "911774596470-f541q8k01falsqa5778jkjusc35khj7b.apps.googleusercontent.com"
 
@@ -50,7 +51,8 @@ const CLIENT_ID = "911774596470-f541q8k01falsqa5778jkjusc35khj7b.apps.googleuser
     SocialLoginModule
 
   ],
-  providers: [ {
+  providers: [
+     {
     provide: "SocialAuthServiceConfig",
     useValue: {
       autoLogin: true,

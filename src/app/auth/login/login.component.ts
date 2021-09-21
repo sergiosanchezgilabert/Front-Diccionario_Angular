@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router, private serviceLogin: LoginService,
     public fb: FormBuilder, private authService: SocialAuthService
   ) {
-    if (localStorage.getItem('ACCESS_TOKEN') !== null) {
+    if (localStorage.getItem('ACCESS_TOKEN') ===serviceLogin.getToken() && serviceLogin.isLoggedIn()) {
       this.logueado = true
     }else {
       this.logueado=false
