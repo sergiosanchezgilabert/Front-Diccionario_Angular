@@ -13,7 +13,7 @@ export class LoginService {
 
   baseUrl = environment.baseUrlBack
 
-  token: string=''
+  token: string = ''
 
   constructor(private http: HttpClient) { }
 
@@ -43,7 +43,14 @@ export class LoginService {
     return EMPTY
   }
   getPersonaGoogle(user: any) {
-    this.saveToken(user.idToken, '18000')
+    const url = this.baseUrl + 'api/google/'
+
+    return this.http.post<JwtResponse>(url,user).pipe(tap((res: JwtResponse) => {
+      if (res) {
+        console.log('Guardado Token')
+        this.saveToken(user.idToken, '18000')
+      }
+    }))
   }
 
   logout() {
@@ -53,8 +60,8 @@ export class LoginService {
   }
 
   saveToken(token: string, expiresIn: string): void {
-   
-    var expires=moment().add(expiresIn, 'second')
+
+    var expires = moment().add(expiresIn, 'second')
     localStorage.setItem("ACCESS_TOKEN", token)
     console.log(expires)
     localStorage.setItem("EXPIRES_IN", JSON.stringify(expires.valueOf()))
@@ -62,10 +69,10 @@ export class LoginService {
   }
 
   getToken(): string {
-    if (this.token=='') {
+    if (this.token == '') {
       return this.token
     }
-    else return this.token=localStorage.getItem('ACCESS_TOKEN')!
+    else return this.token = localStorage.getItem('ACCESS_TOKEN')!
   }
 
   public isLoggedIn() {

@@ -37,10 +37,10 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router, private serviceLogin: LoginService,
     public fb: FormBuilder, private authService: SocialAuthService
   ) {
-    if (localStorage.getItem('ACCESS_TOKEN') ===serviceLogin.getToken() && serviceLogin.isLoggedIn()) {
+    if (localStorage.getItem('ACCESS_TOKEN') === serviceLogin.getToken() && serviceLogin.isLoggedIn()) {
       this.logueado = true
-    }else {
-      this.logueado=false
+    } else {
+      this.logueado = false
       if (!localStorage.getItem('reload')) {
         localStorage.setItem('reload', 'no reload')
         location.reload()
@@ -57,29 +57,26 @@ export class LoginComponent implements OnInit {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID)
     this.authService.authState.subscribe(user => {
       this.user = user;
-      this.serviceLogin.getPersonaGoogle(user)
+      this.serviceLogin.getPersonaGoogle(user).subscribe(then => {
+        this.logueado = true
 
-      this.logueado = true
-      /*const myObservable = of(1, 2, 3);
+        localStorage.setItem('nombre', user.name)
+        localStorage.setItem('usuario', user.email)
+        localStorage.setItem('foto_perfil', user.photoUrl)
 
-      myObservable.pipe(
-        delay(3000)
-      )*/
-
-      localStorage.setItem('nombre', user.name)
-      localStorage.setItem('usuario', user.email)
-      localStorage.setItem('foto_perfil', user.photoUrl)
-
-      Swal.fire({
-        position: 'top',
-        icon: 'success',
-        title: 'Bienvenido ' + user.name,
-        showConfirmButton: false,
-        timer: 4000
-      }).then(resp =>
-        this.router.navigate(['home'])
-      )
-    });
+        Swal.fire({
+          position: 'top',
+          icon: 'success',
+          title: 'Bienvenido ' + user.name,
+          showConfirmButton: false,
+          timer: 4000
+        }).then(resp => {
+          console.log('ey')
+          this.router.navigate(['home'])
+        }
+        )
+      });
+    })
   }
 
   submit() {
@@ -157,10 +154,6 @@ export class LoginComponent implements OnInit {
         })
       }
     }
-  }
-
-  google() {
-
   }
 
   home() {

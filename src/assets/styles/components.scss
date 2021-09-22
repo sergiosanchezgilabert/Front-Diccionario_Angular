@@ -225,7 +225,6 @@
 .img-perfil {
     width: 200px;
     border-radius: 1000px;
-
 }
 
 /* ==== Texto de perfil ====*/
@@ -234,15 +233,32 @@
 }
 
 /* ==== Color fondo toolbar perfil ====*/
-.perfil-toolbar_background{
-    background-color: lightgray
+.perfil-toolbar_background {
+    background-color: lightgray;
 }
 
 /* ==== Color fondo sidenav perfil ====*/
-.perfil-container_backgroud{
-    background-color: lightgray
+.perfil-container_backgroud {
+    background-color: lightgray;
 }
 
-.img-perfil-container{
+.img-perfil-container {
     margin: 40px;
+}
+
+/* === Altura minima de lista de palabras Espanol ===*/
+.container-lista-espanol {
+    min-height: 500px;
+}
+
+/* === Responsive para el perfil ===*/
+@media (max-width:600px) {
+    .perfil-container{
+        overflow: scroll;
+        text-align: center;
+        width: 100%;
+    }
+    .img-perfil{
+        margin: auto;
+    }
 }

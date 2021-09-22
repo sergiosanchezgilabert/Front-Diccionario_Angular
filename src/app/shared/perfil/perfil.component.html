@@ -6,10 +6,11 @@
       </button>
     </mat-toolbar-row>
   </mat-toolbar>
-  <mat-sidenav-container class="perfil-container-hola">
-    <mat-sidenav #drawer class=" perfil-container_backgroud" mode="side" opened role="navigation">
-      <div class="img-perfil-container"><img class="img-perfil" src={{foto}} alt="Foto Perfil"></div>
-      <br>
+  <mat-sidenav-container>
+    <mat-sidenav class="perfil-container perfil-container_backgroud" #drawer mode="side" opened role="navigation">
+      <div class=" img-perfil img-perfil-container">
+        <img class="img-perfil" src={{foto}} alt="Foto Perfil">
+      </div>
       <mat-nav-list>
         <div mat-list-item class="text-perfil"><b>Nombre: </b> <p>{{nombre}}</p></div>
         <div mat-list-item class="text-perfil"><b>Usuario:</b><p>{{usuario}}</p></div> 
